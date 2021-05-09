@@ -1,0 +1,376 @@
+body {
+    zoom: 70%;
+}
+
+.nav123 {
+    margin-bottom: 20px !important;
+    background-color: rgb(16, 124, 28) !important;
+    font-size: x-large;
+    position: relative;
+    color: azure !important;
+}
+
+.nav-link {
+    width: 200px;
+    margin-left: 30px;
+
+}
+
+.searchi {
+    margin-left: 20%;
+}
+
+
+.navim {
+    margin-left: auto !important;
+}
+
+.foot {
+    bottom: 0 !important;
+    background-color: rgb(16, 124, 28) !important;
+    margin-top: 20px !important;
+    width: 100% !important;
+
+    height: auto;
+}
+
+.card {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.detailstext {
+    width: 50% !important;
+    height: 100% !important;
+    position: relative;
+}
+
+.card-img-top {
+    width: 80% !important;
+    height: 80% !important;
+    padding-right: 10%;
+}
+
+.col-lg-2 {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.btn {
+    text-align: center !important;
+    background-color: rgb(16, 124, 28) !important;
+}
+
+.container-fluid {
+    background-color: rgb(16, 124, 28) !important;
+}
+
+.pro {
+    font-size: xx-large;
+    margin-bottom: 50px;
+
+}
+
+.texti {
+    width: 50% !important;
+
+}
+
+.bdy {
+    padding-top: 30px;
+    font-size: x-large;
+}
+
+.sal {
+    width: 30%;
+}
+
+
+
+li {
+    font-size: xx-large;
+    width: 100% !important;
+
+}
+
+.geoli {
+    margin-right: 40px;
+    color: azure;
+}
+
+.pargeolei {
+    text-align: right;
+    font-size: 200% !important;
+    height: 100% !important;
+}
+
+.shaot {
+    width: 30% !important;
+    margin-right: 40px;
+    color: azure;
+}
+
+.parshaot {
+    font-size: 200%;
+    text-align: right;
+    height: 100% !important;
+
+}
+
+.mapa {
+    width: 30% !important;
+    height: 100% !important;
+
+}
+
+span.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='azure' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+span.navbar-toggler-icon {
+    border-color: azure !important;
+}
+
+.navbar-toggler {
+    color: azure !important;
+}
+
+.geoli {
+    margin-right: 40px;
+    color: azure;
+}
+
+.shaot {
+    width: 30% !important;
+    margin-right: 40px;
+    color: azure;
+}
+
+.mapa {
+    width: 30% !important;
+}
+
+.zhoiot {
+    color: azure;
+
+}
+
+@media screen and (max-width:1200px) {
+    li {
+        width: 200px !important;
+        margin-left: auto;
+    }
+}
+
+@media screen and (max-width:700px) {
+
+
+    .btn {
+        width: auto;
+    }
+
+    .tmona {
+        order: 1;
+        box-sizing: border-box;
+        width: 150% !important;
+        align-items: center;
+
+    }
+
+    .texti {
+        order: 2;
+        box-sizing: border-box;
+        align-items: center;
+
+    }
+
+    .bdy {
+        width: 150% !important;
+        align-items: center;
+
+    }
+
+    .pro {
+        text-align: center;
+    }
+
+    .container {
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .mapa {
+        display: none;
+    }
+
+    .pargeolei {
+        text-align: center;
+    }
+
+    .parshaot {
+        text-align: center;
+    }
+
+    .shaot {
+        width: 100% !important;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+
+
+
+
+.img-sm {
+    width: 30%;
+    height: 30%;
+}
+
+
+.table-shopping-cart .price {
+    font-weight: bold;
+
+}
+
+
+
+
+.itemside {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    width: 100%;
+    justify-content: right;
+}
+
+
+.btn-main {
+    border-radius: 2px;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 10px 19px;
+    cursor: pointer;
+    color: #fff;
+    width: 100%
+}
+
+.btn-light {
+    color: #ffffff;
+    background-color: #F44336;
+    border-color: #f8f9fa;
+    font-size: 12px
+}
+
+.btn-light:hover {
+    color: #ffffff;
+    background-color: #F44336;
+    border-color: #F44336
+}
+
+.sahacol {
+    position: relative;
+    width: fit-content;
+    display: block;
+    text-align: right;
+}
+
+.copon {
+    position: relative;
+    text-align: right;
+}
+
+.cartproducts {
+    text-align: right;
+
+}
+
+a {
+    position: relative;
+    float: right;
+}
+
+.imgremove {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+}
+
+.img-fluid {
+    width: 100%;
+    height: 100%;
+
+}
+
+h4 {
+    font-weight: normal;
+}
+
+.coteret {
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+.align {
+    margin: auto;
+    direction: rtl;
+
+}
+
+.mehir {
+    margin: auto;
+    direction: rtl;
+}
+
+.qty {
+    width: 30%;
+}
+
+.btn {
+    background-color: rgb(16, 124, 28) !important;
+}
+
+.copon {
+    width: 35%;
+    border-radius: 4px !important;
+}
+
+.codecopon {
+    width: 65%;
+    height: 123%;
+}
+
+.mishloah {
+    margin-bottom: .5rem;
+    font-weight: 500;
+}
+
+.coponsrow {
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+.sahacolsalkniot {
+    margin-bottom: 1%;
+}
+
+.coteret {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5%;
+    font-weight: bold;
+}
+
+.btn1 {
+    margin-top: 4%;
+    margin-bottom: 10%;
+    width: 100% !important;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.detail {
+    text-align: right;
+    font-size: x-large;
+}
