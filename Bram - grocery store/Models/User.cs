@@ -34,17 +34,14 @@ namespace Bram___grocery_store.Models
         [RegularExpression(@"^[A-Za-z0-9\s]*$")]
         public string Password { get; set; }
 
-        [Display(Name = "Admin User")]
         public bool IsAdmin { get; set; }
 
-        [Display(Name = "Email Address")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
+        [Display(Name = "mail@mail.co.il")]
         public String Email { get; set; }
 
-        [Display(Name = "Entrance Date")]
-        [DataType(DataType.Date)]
-        public DateTime EnteranceDate { get; set; }
-
-        public ICollection<Invoice> Invoices { get; set; }
+        public Cart Cart { get; set; }
 
     }
 }
+
