@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Bram___grocery_store.Data;
 
 namespace Bram___grocery_store
 {
@@ -24,6 +26,9 @@ namespace Bram___grocery_store
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<Bram___grocery_storeContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("Bram___grocery_storeContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

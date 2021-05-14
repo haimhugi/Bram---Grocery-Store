@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -25,7 +26,7 @@ namespace Bram___grocery_store.Models
                 OnPropertyChanged();
             }
         }
-
+        public int UserId { get; set; }
         public User User {
             get => _user; 
             set {
@@ -33,7 +34,7 @@ namespace Bram___grocery_store.Models
                 OnPropertyChanged();
             }
         }
-        
+
         public ObservableCollection<ProductCart> Products {
             get => _products; 
             set {
@@ -66,6 +67,15 @@ namespace Bram___grocery_store.Models
             IsPaid = false;
             TotalCartPrice = 0;
         }
+
+
+ /*       protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Cart>()
+                .HasOne(a => a.User)
+                .WithOne(b => b.Cart)
+                .HasForeignKey<User>(b => b.Cart.Id);
+        }*/
 
         protected void OnPropertyChanged([CallerMemberName] string name = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

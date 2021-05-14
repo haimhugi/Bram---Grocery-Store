@@ -9,7 +9,7 @@ namespace Bram___grocery_store.Models
 {
     public class User
     {
-        public int UserID { get; set; }
+        public int Id { get; set; }
 
         [StringLength(50)]
         [Required]
@@ -38,7 +38,7 @@ namespace Bram___grocery_store.Models
 
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
         [Display(Name = "mail@mail.co.il")]
-        public String Email { get; set; }
+        public string Email { get; set; }
 
         public Cart Cart { get; set; }
 
