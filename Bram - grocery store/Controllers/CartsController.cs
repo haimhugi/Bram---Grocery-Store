@@ -48,7 +48,7 @@ namespace Bram___grocery_store.Controllers
         // GET: Carts/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "FirstName");
+            ViewData["UserId"] = new SelectList(_context.User, "Id", "FirstName");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace Bram___grocery_store.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "FirstName", cart.UserId);
+            ViewData["UserId"] = new SelectList(_context.User, "Id", "FirstName", cart.UserId);
             return View(cart);
         }
 
@@ -82,7 +82,7 @@ namespace Bram___grocery_store.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "FirstName", cart.UserId);
+            ViewData["UserId"] = new SelectList(_context.User, "Id", "FirstName", cart.UserId);
             return View(cart);
         }
 
@@ -118,7 +118,7 @@ namespace Bram___grocery_store.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "FirstName", cart.UserId);
+            ViewData["UserId"] = new SelectList(_context.User, "Id", "FirstName", cart.UserId);
             return View(cart);
         }
 

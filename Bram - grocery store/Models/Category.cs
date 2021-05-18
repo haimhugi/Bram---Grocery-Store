@@ -9,59 +9,18 @@ using System.Threading.Tasks;
 
 namespace Bram___grocery_store.Models
 {
-    public class Category : INotifyPropertyChanged
+    public class Category
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private readonly int IdCounter = 0;
-        private int _id;
-        private string _name;
-        private ObservableCollection<Product> _products;
-        private Sales _currentSale;
-
-        public int Id {
-            get => _id; 
-            private set {
-                _id = value;
-                OnPropertyChanged();
-            }
-        }
+        public int Id { get; set; }
 
         [MaxLength(20)]
         [Required]
-        public string Name {
-            get => _name; 
-            set {
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Name { get; set; }
 
-        public ObservableCollection<Product> Products {
-            get => _products; 
-            set {
-                _products = value;
-                OnPropertyChanged();
-            }
-        }
+        public List<Product> Products { get; set; }
 
-        public Sales CurrentSale {
-            get => _currentSale; 
-            set {
-                _currentSale = value;
-                OnPropertyChanged();
-            }
-        }
+        public int SaleId { get; set; }
+        public Sales MySale { get; set; }
 
-        public Category()
-        {
-            Id = ++IdCounter;
-            Name = string.Empty;
-            Products = new ObservableCollection<Product>();
-            CurrentSale = new Sales();
-        }
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
