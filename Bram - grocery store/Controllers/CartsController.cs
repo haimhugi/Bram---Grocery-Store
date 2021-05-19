@@ -22,7 +22,7 @@ namespace Bram___grocery_store.Controllers
         // GET: Carts
         public async Task<IActionResult> Index()
         {
-            var bram___grocery_storeContext = _context.Cart.Include(c => c.User);
+            var bram___grocery_storeContext = _context.Cart.Include(c => c.User).Include(c => c.ProductsCart);
             return View(await bram___grocery_storeContext.ToListAsync());
         }
 
@@ -57,7 +57,7 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,IsPaid,TotalCartPrice")] Cart cart)
+        public async Task<IActionResult> Create([Bind("UserId,IsPaid,TotalCartPrice")] Cart cart, Product Product)
         {
             if (ModelState.IsValid)
             {

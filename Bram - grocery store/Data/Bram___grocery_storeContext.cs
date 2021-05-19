@@ -18,8 +18,6 @@ namespace Bram___grocery_store.Data
 
         public DbSet<Bram___grocery_store.Models.Category> Category { get; set; }
 
-        public DbSet<Bram___grocery_store.Models.Sale> Sale { get; set; }
-
         public DbSet<Bram___grocery_store.Models.Cart> Cart { get; set; }
 
         public DbSet<Bram___grocery_store.Models.User> User { get; set; }

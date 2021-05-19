@@ -19,10 +19,5 @@ namespace Bram___grocery_store.Models
         public string Name { get; set; }
 
         public List<Product> Products { get; set; }
-
-        [Display(Name = "Choose Sale: ")]
-        public int SaleId { get; set; }
-        public Sale Sale { get; set; }
-
     }
 }

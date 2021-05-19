@@ -61,10 +61,12 @@ namespace Bram___grocery_store.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
             return View(product);
         }
