@@ -12,17 +12,20 @@ namespace Bram___grocery_store.Models
     {
         public int Id { get; set; }
 
-        [MaxLength(20)]
-        [Required]
+        [StringLength(50)]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        [MaxLength(20)]
         public int Price { get; set; }
 
+        [Display(Name = "Photo Product Url: ")]
         public string PhotoUrl { get; set; }
 
+        [Display(Name = "Choose Category: ")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        
+
+        public List<ProductCart> ProductCarts { get; set; }
+
     }
 }

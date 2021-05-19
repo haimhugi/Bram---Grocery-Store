@@ -18,11 +18,11 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SaleId)
+            @Html.DisplayNameFor(model => model.Sale)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SaleId)
-        </dd>
+            @Html.DisplayFor(model => model.Sale.SaleName)
+        </dd class>
     </dl>
     
     <form asp-action="Delete">

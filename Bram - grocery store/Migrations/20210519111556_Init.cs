@@ -7,17 +7,17 @@ namespace Bram___grocery_store.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Sales",
+                name: "Sale",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SaleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DiscountPercentage = table.Column<float>(type: "real", nullable: false)
+                    SaleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DiscountPercentage = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sales", x => x.Id);
+                    table.PrimaryKey("PK_Sale", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,18 +44,18 @@ namespace Bram___grocery_store.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    CurrentSaleId = table.Column<int>(type: "int", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SaleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Category_Sales_CurrentSaleId",
-                        column: x => x.CurrentSaleId,
-                        principalTable: "Sales",
+                        name: "FK_Category_Sale_SaleId",
+                        column: x => x.SaleId,
+                        principalTable: "Sale",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,30 +85,48 @@ namespace Bram___grocery_store.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
                     PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: true),
-                    FinalPrice = table.Column<float>(type: "real", nullable: true),
-                    CartId = table.Column<int>(type: "int", nullable: true)
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_Cart_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Cart",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Product_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductCart",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    CartId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    FinalPrice = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductCart", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductCart_Cart_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Cart",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductCart_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -118,37 +136,45 @@ namespace Bram___grocery_store.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Category_CurrentSaleId",
+                name: "IX_Category_SaleId",
                 table: "Category",
-                column: "CurrentSaleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Product_CartId",
-                table: "Product",
-                column: "CartId");
+                column: "SaleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",
                 table: "Product",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductCart_CartId",
+                table: "ProductCart",
+                column: "CartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductCart_ProductId",
+                table: "ProductCart",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "ProductCart");
 
             migrationBuilder.DropTable(
                 name: "Cart");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "User");
 
             migrationBuilder.DropTable(
-                name: "Sales");
+                name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Sale");
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Bram___grocery_store.Migrations
 {
-    public partial class Init4 : Migration
+    public partial class Init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

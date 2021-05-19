@@ -22,7 +22,7 @@ namespace Bram___grocery_store.Controllers
         // GET: ProductCarts
         public async Task<IActionResult> Index()
         {
-            var bram___grocery_storeContext = _context.ProductCart.Include(p => p.Category);
+            var bram___grocery_storeContext = _context.ProductCart.Include(p => p.Cart).Include(p => p.Product);
             return View(await bram___grocery_storeContext.ToListAsync());
         }
 
@@ -35,7 +35,8 @@ namespace Bram___grocery_store.Controllers
             }
 
             var productCart = await _context.ProductCart
-                .Include(p => p.Category)
+                .Include(p => p.Cart)
+                .Include(p => p.Product)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (productCart == null)
             {
@@ -48,7 +49,11 @@ namespace Bram___grocery_store.Controllers
         // GET: ProductCarts/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name");
+            ViewData["CartId"] = new SelectList(_context.Cart, "UserId", "UserId");
+            
+            //ViewData["UserName"] = new SelectList(_context.User, "UserName", "UserName");
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Name");
+            //ViewData["ProductPrice"] = new SelectList(_context.Product, ViewBag.ProductId, "Price");
             return View();
         }
 
@@ -57,7 +62,7 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Amount,FinalPrice,Id,Name,Price,PhotoUrl,CategoryId")] ProductCart productCart)
+        public async Task<IActionResult> Create([Bind("Id,ProductId,CartId,Amount,FinalPrice")] ProductCart productCart)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +70,8 @@ namespace Bram___grocery_store.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", productCart.CategoryId);
+            ViewData["CartId"] = new SelectList(_context.Cart, "UserId", "UserId", productCart.CartId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Name", productCart.ProductId);
             return View(productCart);
         }
 
@@ -82,7 +88,8 @@ namespace Bram___grocery_store.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", productCart.CategoryId);
+            ViewData["CartId"] = new SelectList(_context.Cart, "UserId", "UserId", productCart.CartId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Name", productCart.ProductId);
             return View(productCart);
         }
 
@@ -91,7 +98,7 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Amount,FinalPrice,Id,Name,Price,PhotoUrl,CategoryId")] ProductCart productCart)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductId,CartId,Amount,FinalPrice")] ProductCart productCart)
         {
             if (id != productCart.Id)
             {
@@ -118,7 +125,8 @@ namespace Bram___grocery_store.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", productCart.CategoryId);
+            ViewData["CartId"] = new SelectList(_context.Cart, "UserId", "UserId", productCart.CartId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Name", productCart.ProductId);
             return View(productCart);
         }
 
@@ -131,7 +139,8 @@ namespace Bram___grocery_store.Controllers
             }
 
             var productCart = await _context.ProductCart
-                .Include(p => p.Category)
+                .Include(p => p.Cart)
+                .Include(p => p.Product)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (productCart == null)
             {

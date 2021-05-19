@@ -22,7 +22,7 @@ namespace Bram___grocery_store.Controllers
         // GET: Sales
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sales.ToListAsync());
+            return View(await _context.Sale.ToListAsync());
         }
 
         // GET: Sales/Details/5
@@ -33,14 +33,14 @@ namespace Bram___grocery_store.Controllers
                 return NotFound();
             }
 
-            var sales = await _context.Sales
+            var sale = await _context.Sale
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (sales == null)
+            if (sale == null)
             {
                 return NotFound();
             }
 
-            return View(sales);
+            return View(sale);
         }
 
         // GET: Sales/Create
@@ -54,15 +54,15 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SaleName,DiscountPercentage")] Sales sales)
+        public async Task<IActionResult> Create([Bind("Id,SaleName,DiscountPercentage")] Sale sale)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(sales);
+                _context.Add(sale);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(sales);
+            return View(sale);
         }
 
         // GET: Sales/Edit/5
@@ -73,12 +73,12 @@ namespace Bram___grocery_store.Controllers
                 return NotFound();
             }
 
-            var sales = await _context.Sales.FindAsync(id);
-            if (sales == null)
+            var sale = await _context.Sale.FindAsync(id);
+            if (sale == null)
             {
                 return NotFound();
             }
-            return View(sales);
+            return View(sale);
         }
 
         // POST: Sales/Edit/5
@@ -86,9 +86,9 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SaleName,DiscountPercentage")] Sales sales)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SaleName,DiscountPercentage")] Sale sale)
         {
-            if (id != sales.Id)
+            if (id != sale.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Bram___grocery_store.Controllers
             {
                 try
                 {
-                    _context.Update(sales);
+                    _context.Update(sale);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SalesExists(sales.Id))
+                    if (!SaleExists(sale.Id))
                     {
                         return NotFound();
                     }
@@ -113,7 +113,7 @@ namespace Bram___grocery_store.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(sales);
+            return View(sale);
         }
 
         // GET: Sales/Delete/5
@@ -124,14 +124,14 @@ namespace Bram___grocery_store.Controllers
                 return NotFound();
             }
 
-            var sales = await _context.Sales
+            var sale = await _context.Sale
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (sales == null)
+            if (sale == null)
             {
                 return NotFound();
             }
 
-            return View(sales);
+            return View(sale);
         }
 
         // POST: Sales/Delete/5
@@ -139,15 +139,15 @@ namespace Bram___grocery_store.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var sales = await _context.Sales.FindAsync(id);
-            _context.Sales.Remove(sales);
+            var sale = await _context.Sale.FindAsync(id);
+            _context.Sale.Remove(sale);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SalesExists(int id)
+        private bool SaleExists(int id)
         {
-            return _context.Sales.Any(e => e.Id == id);
+            return _context.Sale.Any(e => e.Id == id);
         }
     }
 }

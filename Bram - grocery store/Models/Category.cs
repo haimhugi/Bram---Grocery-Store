@@ -13,14 +13,16 @@ namespace Bram___grocery_store.Models
     {
         public int Id { get; set; }
 
-        [MaxLength(20)]
-        [Required]
+        [StringLength(50)]
+        [Required(ErrorMessage = "Name is required")]
+
         public string Name { get; set; }
 
         public List<Product> Products { get; set; }
 
+        [Display(Name = "Choose Sale: ")]
         public int SaleId { get; set; }
-        public Sales MySale { get; set; }
+        public Sale Sale { get; set; }
 
     }
 }

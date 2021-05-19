@@ -36,7 +36,7 @@ namespace Bram___grocery_store.Controllers
 
             var cart = await _context.Cart
                 .Include(c => c.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.UserId == id);
             if (cart == null)
             {
                 return NotFound();
@@ -57,7 +57,7 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,IsPaid,TotalCartPrice")] Cart cart)
+        public async Task<IActionResult> Create([Bind("UserId,IsPaid,TotalCartPrice")] Cart cart)
         {
             if (ModelState.IsValid)
             {
@@ -91,9 +91,9 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,IsPaid,TotalCartPrice")] Cart cart)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,IsPaid,TotalCartPrice")] Cart cart)
         {
-            if (id != cart.Id)
+            if (id != cart.UserId)
             {
                 return NotFound();
             }
@@ -107,7 +107,7 @@ namespace Bram___grocery_store.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CartExists(cart.Id))
+                    if (!CartExists(cart.UserId))
                     {
                         return NotFound();
                     }
@@ -132,7 +132,7 @@ namespace Bram___grocery_store.Controllers
 
             var cart = await _context.Cart
                 .Include(c => c.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.UserId == id);
             if (cart == null)
             {
                 return NotFound();
@@ -154,7 +154,7 @@ namespace Bram___grocery_store.Controllers
 
         private bool CartExists(int id)
         {
-            return _context.Cart.Any(e => e.Id == id);
+            return _context.Cart.Any(e => e.UserId == id);
         }
     }
 }

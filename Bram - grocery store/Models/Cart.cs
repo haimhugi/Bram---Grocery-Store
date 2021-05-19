@@ -12,17 +12,24 @@ namespace Bram___grocery_store.Models
 {
     public class Cart
     {
-        [Required]
-        public int Id { get; set; }
 
+
+        [Display(Name = "Choose User: ")]
+        [Key]
         public int UserId { get; set; }
+        
         public User User { get; set; }
 
-        public ObservableCollection<ProductCart> Products { get; set; }
+        
 
+        [Display(Name = "The Cart Paid?")]
         public bool IsPaid { get; set; }
 
+        [DefaultValue(0)]
+        [Display(Name = "Total Cart Price")]
         public float TotalCartPrice { get; set; }
+
+        public ObservableCollection<ProductCart> ProductsCart { get; set; }
 
     }
 }
