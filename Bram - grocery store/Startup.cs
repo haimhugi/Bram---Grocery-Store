@@ -29,6 +29,9 @@ namespace Bram___grocery_store
 
             services.AddDbContext<Bram___grocery_storeContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("Bram___grocery_storeContext")));
+            services.AddSession(op => {
+                op.IdleTimeout = TimeSpan.FromMinutes(5);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +51,7 @@ namespace Bram___grocery_store
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
