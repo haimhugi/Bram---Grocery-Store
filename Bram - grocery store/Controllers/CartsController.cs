@@ -59,7 +59,7 @@ namespace Bram___grocery_store.Controllers
             {
                 return NotFound();
             }
-            HttpContext.Session.SetString("MyShoppingCartId", id.ToString());
+            HttpContext.Session.SetString("CartId", id.ToString());
             return View("../Products/Index", _context.Product);
         }
 

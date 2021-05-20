@@ -33,8 +33,6 @@ namespace Bram___grocery_store.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public bool IsAdmin { get; set; }
-
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
         [Display(Name = "Enter Mail")]
         public string Email { get; set; }

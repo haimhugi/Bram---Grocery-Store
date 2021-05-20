@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,26 +23,17 @@ namespace Bram___grocery_store.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
+            {
+                return View("../Products/Index", _context.Product);
+            }
             return View(await _context.User.ToListAsync());
         }
 
         // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
 
-            return View(user);
-        }
+
 
         // GET: Users/Create
         public IActionResult Create()
@@ -58,9 +50,26 @@ namespace Bram___grocery_store.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (HttpContext.Session.GetString("userName") != null && HttpContext.Session.GetString("userName").Equals("admin"))
+                {
+                    _context.Add(user);
+                    await _context.SaveChangesAsync();
+                    return View("../Products/Index", _context.Product);
+                }
+                var answer = _context.User.Where(x => x.UserName == user.UserName);
+                if (answer.Count() > 0)
+                {
+                    ViewData["Error"] = "The username you selected was caught, please choose another name";
+                    return View(user);
+                }
+                else
+                {
+                    _context.Add(user);
+                    await _context.SaveChangesAsync();
+                    HttpContext.Session.SetString("userId", user.Id.ToString());
+                    HttpContext.Session.SetString("userName", user.UserName);
+                    return View("../Products/Index", _context.Product);
+                }
             }
             return View(user);
         }
@@ -68,12 +77,11 @@ namespace Bram___grocery_store.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("userId") == null)
             {
-                return NotFound();
+                return View("../Products/Index", _context.Product);
             }
-
-            var user = await _context.User.FindAsync(id);
+            var user = await _context.User.FindAsync(Int32.Parse(HttpContext.Session.GetString("userId")));
             if (user == null)
             {
                 return NotFound();
@@ -88,6 +96,10 @@ namespace Bram___grocery_store.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,UserName,Password,IsAdmin,Email")] User user)
         {
+            if (HttpContext.Session.GetString("userId") == null)
+            {
+                return View("../Products/Index", _context.Product);
+            }
             if (id != user.Id)
             {
                 return NotFound();
@@ -97,21 +109,28 @@ namespace Bram___grocery_store.Controllers
             {
                 try
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id))
+                    var answer = _context.User.Where(x => x.UserName == user.UserName);
+                    if (answer.Count() > 0 && user.UserName != HttpContext.Session.GetString("userName"))
                     {
-                        return NotFound();
+                        ViewData["Error"] = "The username you selected was caught, please choose another name";
+                        return View(user);
                     }
                     else
                     {
+                        _context.Update(user);
+                        await _context.SaveChangesAsync();
+                        return View("../Products/Index", _context.Product);
+                    }
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(user.Id)) {
+                        return NotFound();
+                    }
+                    else {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(user);
         }
@@ -119,13 +138,12 @@ namespace Bram___grocery_store.Controllers
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
             {
-                return NotFound();
+                return View("../Products/Index", _context.Product);
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _context.User.FirstOrDefaultAsync(x => x.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -139,6 +157,10 @@ namespace Bram___grocery_store.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
+            {
+                return View("../Products/Index", _context.Product);
+            }
             var user = await _context.User.FindAsync(id);
             _context.User.Remove(user);
             await _context.SaveChangesAsync();
@@ -148,6 +170,35 @@ namespace Bram___grocery_store.Controllers
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.Id == id);
+        }
+        public IActionResult Login()
+        {
+            ViewData["CartId"] = new SelectList(_context.Cart, "Id", "Id");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("Id,Name,Passowrd")] User user)
+        {
+            var answer = await _context.User.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefaultAsync();
+            if (answer != null)
+            {
+                HttpContext.Session.SetString("userName", answer.UserName);
+                HttpContext.Session.SetString("userId", answer.Id.ToString());    
+                return View("../Products/Index", _context.Product);
+            }
+            else
+            {
+                ViewData["Error"] = "משתמש לא קיים במערכת נא להירשם!";
+            }
+            return View();
+        }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("userId");
+            HttpContext.Session.Remove("userName");
+            HttpContext.Session.Remove("CartId");
+            return View("../Products/Index", _context.Product);
         }
     }
 }

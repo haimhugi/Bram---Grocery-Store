@@ -3,14 +3,16 @@ using Bram___grocery_store.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bram___grocery_store.Migrations
 {
     [DbContext(typeof(Bram___grocery_storeContext))]
-    partial class Bram___grocery_storeContextModelSnapshot : ModelSnapshot
+    [Migration("20210520152508_Check")]
+    partial class Check
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

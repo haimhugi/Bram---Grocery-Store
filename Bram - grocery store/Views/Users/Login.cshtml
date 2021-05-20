@@ -1,0 +1,53 @@
+﻿@model Bram___grocery_store.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="col-sm bg-light" style="opacity:0.80; font-weight:bold; margin:11px;">
+            <h2 style="text-align:center;" class="text-danger">Login</h2>
+
+            <form asp-controller="Users" asp-action="LogIn">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label RTL right text-danger">שם</label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label RTL right text-danger">סיסמה</label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-success btn-block" />
+                </div>
+            </form>
+            @if (ViewData["Error"] != null)
+            {
+                <br />
+                <div style="color:red; text-align:center" class="RTL text-danger">@ViewData["Error"]</div>
+                <br />
+            }
+            <form asp-controller="Users" asp-action="Create" class="mb-3">
+                <input type="submit" value="Register" class="btn btn-info btn-block" />
+            </form>
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
