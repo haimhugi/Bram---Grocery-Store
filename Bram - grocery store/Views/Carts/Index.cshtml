@@ -15,9 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.User)
             </th>
-            @*<th>
-                Protucts in cart
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.IsPaid)
             </th>
@@ -33,14 +30,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.User.FirstName)
             </td>
-            @*<td>
-                <ul>
-                    @foreach (var productscarts in item.ProductsCart)
-                    {
-                        <li> <a asp-action="Details" asp-controller="Products" asp-route-id="@productscarts.Id">@productscarts.Id</a> </li>
-                    }
-                </ul>
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.IsPaid)
             </td>
@@ -49,7 +38,8 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                <a asp-action="Load" asp-route-id="@item.UserId">Load</a>
+                <a asp-action="Details" asp-route-id="@item.UserId">Details</a>
                 <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
             </td>
         </tr>

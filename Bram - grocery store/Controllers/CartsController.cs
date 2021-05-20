@@ -28,8 +28,41 @@ namespace Bram___grocery_store.Controllers
                 return View("../Users/LogIn");
             }
             var bram___grocery_storeContext = _context.Cart.Include(c => c.User).Include(c => c.ProductsCart);
-            return View(await bram___grocery_storeContext.ToListAsync());
+            var carts = _context.Cart.Where(cart => cart.UserId == int.Parse(HttpContext.Session.GetString("userId")));
+            try
+            {
+                carts.Count();
+                return View(await carts.ToListAsync());
+            }
+            catch
+            {
+                return View("EmptyCarts");
+            }
         }
+        public IActionResult EmptyCarts()
+        {
+            if (HttpContext.Session.GetString("userId") == null)
+            {
+                return View("../Users/LogIn");
+            }
+            return View();
+        }
+
+        // GET: ShoppingCarts/Details/5
+        public IActionResult Load(int? id)
+        {
+            if (HttpContext.Session.GetString("userId") == null)
+            {
+                return View("../users/LogIn");
+            }
+            if (id == null)
+            {
+                return NotFound();
+            }
+            HttpContext.Session.SetString("MyShoppingCartId", id.ToString());
+            return View("../Products/Index", _context.Product);
+        }
+
 
         // GET: Carts/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -51,7 +84,7 @@ namespace Bram___grocery_store.Controllers
             {
                 return NotFound();
             }
-            // ViewData["finalPrice"] = _context.ProductInCart.Where(p => p.ShoppingCartId == shoppingCart.Id).Select(p1 => p1.FinalPrice).Sum();
+            ViewData["TotalCartPrice"] = _context.ProductCart.Where(p => p.Cart == cart).Select(p1 => p1.FinalPrice).Sum();
             return View(cart);
         }
 

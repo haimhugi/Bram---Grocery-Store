@@ -12,15 +12,13 @@ namespace Bram___grocery_store.Models
 {
     public class Cart
     {
-
+        public int Id { get; set; }
 
         [Display(Name = "Choose User: ")]
         [Key]
         public int UserId { get; set; }
         
         public User User { get; set; }
-
-        
 
         [Display(Name = "The Cart Paid?")]
         public bool IsPaid { get; set; }

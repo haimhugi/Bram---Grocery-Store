@@ -10,25 +10,36 @@
     <h4>Cart</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.User)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.User.FirstName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsPaid)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IsPaid)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TotalCartPrice)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TotalCartPrice)
         </dd>
     </dl>
+    <hr />
+    <br />
+    <h3 class="text-center text-danger font-weight-bold" style="text-align:right; direction:rtl">
+        סך לתשלום: 
+        @ViewData["TotalCartPrice"]
+        <i class="fa fa-ils" aria-hidden="true"></i>
+    </h3>
+    <br />
+    <hr />
+    <h1 class="bg-light opacity p-2 m-2 text-center text-danger" style="align-items:center; direction:rtl;">תודה שקנית אצלינו!</h1>
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.UserId">Edit</a> |
