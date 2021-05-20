@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bram___grocery_store.Data;
 using Bram___grocery_store.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Bram___grocery_store.Controllers
 {
@@ -22,6 +23,10 @@ namespace Bram___grocery_store.Controllers
         // GET: Carts
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("userId") == null)
+            {
+                return View("../Users/LogIn");
+            }
             var bram___grocery_storeContext = _context.Cart.Include(c => c.User).Include(c => c.ProductsCart);
             return View(await bram___grocery_storeContext.ToListAsync());
         }
@@ -29,6 +34,11 @@ namespace Bram___grocery_store.Controllers
         // GET: Carts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("userId") == null)
+            {
+                return View("../Users/LogIn");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -41,7 +51,7 @@ namespace Bram___grocery_store.Controllers
             {
                 return NotFound();
             }
-
+            // ViewData["finalPrice"] = _context.ProductInCart.Where(p => p.ShoppingCartId == shoppingCart.Id).Select(p1 => p1.FinalPrice).Sum();
             return View(cart);
         }
 
@@ -125,6 +135,11 @@ namespace Bram___grocery_store.Controllers
         // GET: Carts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("userName") == null)
+            {
+                return View("../Products/Index", _context.Product);
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -137,7 +152,7 @@ namespace Bram___grocery_store.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["TotalCartPrice"] = _context.ProductCart.Where(p => p.Cart == cart).Select(p1 => p1.FinalPrice).Sum();
             return View(cart);
         }
 
@@ -146,6 +161,11 @@ namespace Bram___grocery_store.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetString("userName") == null)
+            {
+                return View("../Products/Index", _context.Product);
+            }
+
             var cart = await _context.Cart.FindAsync(id);
             _context.Cart.Remove(cart);
             await _context.SaveChangesAsync();
