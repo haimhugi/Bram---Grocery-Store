@@ -4,45 +4,30 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2 class="text-center p-3 mt-3 bg-light opacity rounded-1 text-danger font-weight-bold">סל הקניות</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table table-striped bg-light opacity">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPaid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalCartPrice)
-            </th>
-            <th></th>
+            <th scope="col" class="text-right font-weight-boldt text-danger"></th>
+            <th scope="col" class="text-right font-weight-boldt text-danger"></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalCartPrice)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
-                <a asp-action="Load" asp-route-id="@item.UserId">Load</a>
-                <a asp-action="Details" asp-route-id="@item.UserId">Details</a>
-                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
-            </td>
-        </tr>
-}
+    <tbody class="text-danger">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-right font-weight-bold">
+                    <form asp-controller="ShoppingCarts" asp-action="Delete" asp-route-id="@item.Id" class="mb-3">
+                        <input type="submit" value="מחק עגלה" class="btn btn-success btn-block opacity rounded-0" />
+                    </form>
+                </td>
+                <td class="text-right font-weight-bold">
+                    <form asp-controller="ShoppingCarts" asp-action="Load" asp-route-id="@item.Id" class="mb-3">
+                        <input type="submit" value="טען עגלה" class="btn btn-success btn-block opacity rounded-0" />
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
