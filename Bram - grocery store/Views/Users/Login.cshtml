@@ -5,6 +5,19 @@
 }
 
 
+@section css {
+    <link href="@Url.Content("~/css/Login.css")" rel="stylesheet" />
+}
+
+
+
+@*
+    asp-controller ~ לאיזה קונטרולר ללכת כמישהו ישלח את הטופס
+    asp-action ~ בתוך הקונטרולר לתוך איזה actionללכת
+    asp-validation-for ~ ולידאציה
+    asp-validation-summary ~ ולידאציה
+    asp-for ~ מקשר למשתנה
+*@
 
 <div class="container">
     <div class="row">
@@ -51,3 +64,71 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+@*
+
+
+    <!-- Midle -->
+
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col">
+
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <h1 style="direction: rtl;  margin-bottom: 20%;  margin-top: 10%;">החשבון שלי:</h1>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col">
+
+            </div>
+            <div class="col">
+
+            </div>
+            <div class="col">
+                <h3 style="direction: rtl; margin-bottom: 20%;">התחבר</h3>
+            </div>
+        </div>
+        <div style="margin-bottom: 2%;" class="row align-items-end">
+            <div class="col-10">
+                <input style="width: 50%; float: right;" type="email" class="form-control" id="exampleFormControlInput1"
+                       placeholder="name@example.com">
+            </div>
+            <div class="col-2 ">
+                <label style="float: right; direction: rtl;  font-size: x-large;" for="staticEmail">
+                    כתובת
+                    אימייל:
+                </label>
+            </div>
+        </div>
+        <div style="margin-bottom: 5%;" class="row align-items-end">
+            <div class="col-10">
+                <input style="width: 50%; float: right;" type="password" class="form-control" id="inputPassword">
+            </div>
+            <div class="col-2 ">
+                <label style="float: right; direction: rtl;font-size: x-large; " for="inputPassword">סיסמה:</label>
+            </div>
+        </div>
+        <div style="margin-bottom: 15%;" class="row">
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+            <div class="col-2">
+                <button style="background-color: rgb(16, 124, 28) !important; ; float: right; width: 70%;" type="button"
+                        class="btn btn-success">
+                    התחבר
+                </button>
+            </div>
+            <div class="col-2"></div>
+
+        </div>
+
+    </div>
+
+    <!-- End Midle -->
+
+*@
