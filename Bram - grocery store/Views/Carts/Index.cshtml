@@ -18,12 +18,12 @@
         {
             <tr>
                 <td class="text-right font-weight-bold">
-                    <form asp-controller="ShoppingCarts" asp-action="Delete" asp-route-id="@item.Id" class="mb-3">
+                    <form asp-controller="Carts" asp-action="Delete" asp-route-id="@item.Id" class="mb-3">
                         <input type="submit" value="מחק עגלה" class="btn btn-success btn-block opacity rounded-0" />
                     </form>
                 </td>
                 <td class="text-right font-weight-bold">
-                    <form asp-controller="ShoppingCarts" asp-action="Load" asp-route-id="@item.Id" class="mb-3">
+                    <form asp-controller="Carts" asp-action="Load" asp-route-id="@item.Id" class="mb-3">
                         <input type="submit" value="טען עגלה" class="btn btn-success btn-block opacity rounded-0" />
                     </form>
                 </td>

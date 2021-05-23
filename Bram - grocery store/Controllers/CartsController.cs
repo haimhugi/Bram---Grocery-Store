@@ -47,7 +47,7 @@ namespace Bram___grocery_store.Controllers
             return View();
         }
 
-        // GET: ShoppingCarts/Details/5
+        // GET: Carts/Details/5
         public IActionResult Load(int? id)
         {
             if (HttpContext.Session.GetString("userId") == null)
@@ -58,7 +58,7 @@ namespace Bram___grocery_store.Controllers
             {
                 return NotFound();
             }
-            HttpContext.Session.SetString("MyCartId", id.ToString());
+            HttpContext.Session.SetString("MyShoppingCartId", id.ToString());
             return View("../Products/Index", _context.Product);
         }
 
