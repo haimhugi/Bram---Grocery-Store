@@ -180,6 +180,7 @@ namespace Bram___grocery_store.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([Bind("Id,UserName,Password")] User user)
         {
+
             var answer = await _context.User.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefaultAsync();
             if (answer != null)
             {

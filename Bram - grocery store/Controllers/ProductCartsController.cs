@@ -14,6 +14,11 @@ namespace Bram___grocery_store.Controllers
     public class ProductCartsController : Controller
     {
         private readonly Bram___grocery_storeContext _context;
+        public ProductCartsController(Bram___grocery_storeContext context)
+        {
+            _context = context;
+        }
+
 
         // GET: ProductCarts
         public async Task<IActionResult> Index()
@@ -28,7 +33,7 @@ namespace Bram___grocery_store.Controllers
             {
                 if (shopProjectContext.Count() == 0)
                 {
-                    return View("EmptyShoppingCart");
+                    return View("EmptyCart");
                 }
                 foreach (var producInCart2 in shopProjectContext)
                 {
@@ -38,15 +43,15 @@ namespace Bram___grocery_store.Controllers
             }
             catch
             {
-                return View("EmptyShoppingCart");
+                return View("EmptyCart");
             }
         }
 
-        public IActionResult EmptyShoppingCart()
+        public IActionResult EmptyCart()
         {
             if (HttpContext.Session.GetString("userId") == null)
             {
-                return View("../users/LogIn");
+                return View("../users/Login");
             }
             return View();
         }
@@ -60,6 +65,17 @@ namespace Bram___grocery_store.Controllers
             ViewData["ProductId"] = new SelectList(_context.Product, "Id");
             return View(productCart);
         }
+        /*
+                 public IActionResult Create(int? id)
+        {
+            var productInCart = new ProductInCart();
+            productInCart.product = _context.Product.Where(p => p.Id == id).FirstOrDefault();
+            productInCart.ProductId = productInCart.product.Id;
+            productInCart.Amount = 1;
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Desc");
+            return View(productInCart);
+        }
+*/
 
         // POST: ProductCarts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -71,7 +87,7 @@ namespace Bram___grocery_store.Controllers
             productCart.Product = _context.Product.Where(p => p.Id == productCart.ProductId).FirstOrDefault();
             if (HttpContext.Session.GetString("userId") == null)
             {
-                return View("../users/LogIn");
+                return View("../users/Login");
             }
             if (ModelState.IsValid)
             {
@@ -141,7 +157,7 @@ namespace Bram___grocery_store.Controllers
             }
             catch { }
 
-            return View("EmptyShoppingCart");
+            return View("EmptyCart");
 
         }
         private bool ProductCartExists(int id)
