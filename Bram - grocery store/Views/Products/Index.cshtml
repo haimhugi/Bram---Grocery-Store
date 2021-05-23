@@ -19,7 +19,7 @@
 
             <div class="btn col-lg-3 col-md-3 col-sm-4 p-2 ">
                 <div class="card p-3 bg-light center myCard" style="opacity:0.85; font-weight:bold;">
-                    <a asp-controller="ProductCarts" asp-action="Create" asp-route-id="@item.Id" style="text-decoration: none !important;">
+                    <a asp-controller="ProductInCarts" asp-action="Create" asp-route-id="@item.Id" style="text-decoration: none !important;">
 
                         <img class="card-img-top productImg" src="@item.PhotoUrl" alt="Card image cap">
                         <div class=" text-danger" style="text-align: center;">
@@ -36,7 +36,7 @@
                             </div>
 
                         </div>
-                    </a>                    
+                    </a>
                     @if (Context.Session.GetString("userName") != null && Context.Session.GetString("userName").Equals("admin"))
                     {
                         <div class="row pt-3 pb-0">
@@ -55,3 +55,4 @@
     </div>
 </div>
 
+<script src="~/js/site.js" asp-append-version="true"></script>

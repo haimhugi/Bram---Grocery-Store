@@ -15,11 +15,6 @@ namespace Bram___grocery_store.Controllers
     {
         private readonly Bram___grocery_storeContext _context;
 
-        public ProductCartsController(Bram___grocery_storeContext context)
-        {
-            _context = context;
-        }
-
         // GET: ProductCarts
         public async Task<IActionResult> Index()
         {
@@ -28,7 +23,7 @@ namespace Bram___grocery_store.Controllers
                 return View("../Users/Login");
             }
             var shopProjectContext = _context.ProductCart
-                .Where(producInCart1 => producInCart1.CartId == int.Parse(HttpContext.Session.GetString("MyShoppingCartId")));
+                .Where(producInCart1 => producInCart1.CartId == int.Parse(HttpContext.Session.GetString("CartId")));
             try
             {
                 if (shopProjectContext.Count() == 0)
@@ -62,27 +57,7 @@ namespace Bram___grocery_store.Controllers
             productCart.Product = _context.Product.Where(p => p.Id == id).FirstOrDefault();
             productCart.ProductId = productCart.Product.Id;
             productCart.Amount = 1;
-            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Desc");
-            return View(productCart);
-        }
-
-        // GET: ProductCarts/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productCart = await _context.ProductCart
-                .Include(p => p.Cart)
-                .Include(p => p.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (productCart == null)
-            {
-                return NotFound();
-            }
-
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id");
             return View(productCart);
         }
 
@@ -100,7 +75,7 @@ namespace Bram___grocery_store.Controllers
             }
             if (ModelState.IsValid)
             {
-                var myShoppingCartId = HttpContext.Session.GetString("MyShoppingCartId");
+                var myShoppingCartId = HttpContext.Session.GetString("CartId");
                 if (myShoppingCartId == null)
                 {
                     var myNewShoppingCart = new Cart()
@@ -112,7 +87,7 @@ namespace Bram___grocery_store.Controllers
                     _context.Add(myNewShoppingCart);
                     await _context.SaveChangesAsync();
                     myShoppingCartId = myNewShoppingCart.Id.ToString();
-                    HttpContext.Session.SetString("MyShoppingCartId", myShoppingCartId);
+                    HttpContext.Session.SetString("CartId", myShoppingCartId);
                 }
 
                 var newProductInCart = new ProductCart()
@@ -137,82 +112,7 @@ namespace Bram___grocery_store.Controllers
                 await _context.SaveChangesAsync();
                 return View("../Products/Index", _context.Product);
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Desc", productCart.ProductId);
-            return View(productCart);
-        }
-
-        // GET: ProductCarts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productCart = await _context.ProductCart.FindAsync(id);
-            if (productCart == null)
-            {
-                return NotFound();
-            }
-            ViewData["CartId"] = new SelectList(_context.Cart, "UserId", "UserId", productCart.CartId);
-            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Name", productCart.ProductId);
-            return View(productCart);
-        }
-
-        // POST: ProductCarts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductId,CartId,Amount,FinalPrice")] ProductCart productCart)
-        {
-            if (id != productCart.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(productCart);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductCartExists(productCart.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CartId"] = new SelectList(_context.Cart, "UserId", "UserId", productCart.CartId);
-            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Name", productCart.ProductId);
-            return View(productCart);
-        }
-
-        // GET: ProductCarts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productCart = await _context.ProductCart
-                .Include(p => p.Cart)
-                .Include(p => p.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (productCart == null)
-            {
-                return NotFound();
-            }
-
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id");
             return View(productCart);
         }
 
@@ -225,12 +125,12 @@ namespace Bram___grocery_store.Controllers
             {
                 return View("../users/LogIn");
             }
-            var productCart = await _context.ProductCart.FindAsync(id);
-            _context.ProductCart.Remove(productCart);
+            var productInCart = await _context.ProductCart.FindAsync(id);
+            _context.ProductCart.Remove(productInCart);
             await _context.SaveChangesAsync();
 
             var shopProjectContext = _context.ProductCart
-               .Where(producInCart1 => producInCart1.CartId == int.Parse(HttpContext.Session.GetString("MyShoppingCartId")));
+               .Where(producInCart1 => producInCart1.CartId == int.Parse(HttpContext.Session.GetString("CartId")));
             try
             {
                 if (shopProjectContext.Count() != 0)
@@ -244,7 +144,6 @@ namespace Bram___grocery_store.Controllers
             return View("EmptyShoppingCart");
 
         }
-
         private bool ProductCartExists(int id)
         {
             return _context.ProductCart.Any(e => e.Id == id);
