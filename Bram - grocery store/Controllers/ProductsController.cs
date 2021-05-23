@@ -22,27 +22,34 @@ namespace Bram___grocery_store.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var bram___grocery_storeContext = _context.Product.Include(p => p.Category);
-            return View(await bram___grocery_storeContext.ToListAsync());
+            return View(await _context.Product.ToListAsync());
+
+            //var bram___grocery_storeContext = _context.Product.Include(p => p.Category);
+            //return View(await bram___grocery_storeContext.ToListAsync());
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        //public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Search(string product)
+
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var products = _context.Product.Where(p => p.Name.Contains(product)).OrderBy(p => p.Name);
+            return View("../Products/Index", await products.ToListAsync());
 
-            var product = await _context.Product
-                .Include(p => p.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return View(product);
+            //var product = await _context.Product
+            //    .Include(p => p.Category)
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            //if (product == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return View(product);
         }
 
         // GET: Products/Create
@@ -57,19 +64,34 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,PhotoUrl,CategoryId")] Product product)
+
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,ImgURL")] Product product)
         {
+            //if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("Admin"))
+            //{
+            //    return View("../Products/Index", _context.Product);
+            //}
             if (ModelState.IsValid)
             {
-                
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
             return View(product);
         }
+        //public async Task<IActionResult> Create([Bind("Id,Name,Price,PhotoUrl,CategoryId")] Product product)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        _context.Add(product);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+
+        //    ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
+        //    return View(product);
+        //}
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
