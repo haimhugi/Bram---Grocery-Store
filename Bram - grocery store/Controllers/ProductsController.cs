@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bram___grocery_store.Data;
 using Bram___grocery_store.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Bram___grocery_store.Controllers
 {
@@ -24,38 +25,25 @@ namespace Bram___grocery_store.Controllers
         {
             return View(await _context.Product.ToListAsync());
 
-            //var bram___grocery_storeContext = _context.Product.Include(p => p.Category);
-            //return View(await bram___grocery_storeContext.ToListAsync());
         }
 
         // GET: Products/Details/5
-        //public async Task<IActionResult> Details(int? id)
+        [HttpPost]
         public async Task<IActionResult> Search(string product)
 
         {
-            var products = _context.Product.Where(p => p.Name.Contains(product)).OrderBy(p => p.Name);
+            var products = _context.Product.Where(x => x.Name.Contains(product)).OrderBy(x => x.Name);
             return View("../Products/Index", await products.ToListAsync());
 
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var product = await _context.Product
-            //    .Include(p => p.Category)
-            //    .FirstOrDefaultAsync(m => m.Id == id);
-            //if (product == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return View(product);
         }
 
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name");
+            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
+            {
+                return View("../Products/Index", _context.Product);
+            }
             return View();
         }
 
@@ -65,12 +53,12 @@ namespace Bram___grocery_store.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,ImgURL")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,PhotoUrl")] Product product)
         {
-            //if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("Admin"))
-            //{
-            //    return View("../Products/Index", _context.Product);
-            //}
+            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("Admin"))
+            {
+                return View("../Products/Index", _context.Product);
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(product);
@@ -79,23 +67,15 @@ namespace Bram___grocery_store.Controllers
             }
             return View(product);
         }
-        //public async Task<IActionResult> Create([Bind("Id,Name,Price,PhotoUrl,CategoryId")] Product product)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
 
-        //        _context.Add(product);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-
-        //    ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
-        //    return View(product);
-        //}
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
+            {
+                return View("../Products/Index", _context.Product);
+            }
             if (id == null)
             {
                 return NotFound();
@@ -106,6 +86,7 @@ namespace Bram___grocery_store.Controllers
             {
                 return NotFound();
             }
+
             ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
             return View(product);
         }
@@ -113,10 +94,16 @@ namespace Bram___grocery_store.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,PhotoUrl,CategoryId")] Product product)
         {
+            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
+            {
+                return View("../Products/Index", _context.Product);
+            }
+
             if (id != product.Id)
             {
                 return NotFound();
@@ -142,20 +129,23 @@ namespace Bram___grocery_store.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
             return View(product);
         }
 
         // GET: Products/Delete/5
+
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
+            {
+                return View("../Products/Index", _context.Product);
+            }
             if (id == null)
             {
                 return NotFound();
             }
 
             var product = await _context.Product
-                .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
@@ -165,11 +155,20 @@ namespace Bram___grocery_store.Controllers
             return View(product);
         }
 
+
+   
+
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
+            {
+                return View("../Products/Index", _context.Product);
+            }
             var product = await _context.Product.FindAsync(id);
             _context.Product.Remove(product);
             await _context.SaveChangesAsync();

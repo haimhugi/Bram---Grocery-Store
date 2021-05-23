@@ -25,7 +25,7 @@ namespace Bram___grocery_store.Controllers
         {
             if (HttpContext.Session.GetString("userId") == null)
             {
-                return View("../Users/LogIn");
+                return View("../Users/Login");
             }
             var Context = _context.Cart.Where(cart => cart.UserId == int.Parse(HttpContext.Session.GetString("userId")));
             try
@@ -42,7 +42,7 @@ namespace Bram___grocery_store.Controllers
         {
             if (HttpContext.Session.GetString("userId") == null)
             {
-                return View("../Users/LogIn");
+                return View("../Users/Login");
             }
             return View();
         }
@@ -52,13 +52,13 @@ namespace Bram___grocery_store.Controllers
         {
             if (HttpContext.Session.GetString("userId") == null)
             {
-                return View("../users/LogIn");
+                return View("../users/Login");
             }
             if (id == null)
             {
                 return NotFound();
             }
-            HttpContext.Session.SetString("MyShoppingCartId", id.ToString());
+            HttpContext.Session.SetString("CartId", id.ToString());
             return View("../Products/Index", _context.Product);
         }
 
@@ -66,7 +66,7 @@ namespace Bram___grocery_store.Controllers
         // GET: Carts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (HttpContext.Session.GetString("userId") == null)
+            if (HttpContext.Session.GetString("userName") == null)
             {
                 return View("../Products/Index", _context.Product);
             }
@@ -78,12 +78,12 @@ namespace Bram___grocery_store.Controllers
 
             var cart = await _context.Cart
                 .Include(c => c.User)
-                .FirstOrDefaultAsync(m => m.UserId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (cart == null)
             {
                 return NotFound();
             }
-            ViewData["TotalCartPrice"] = _context.ProductCart.Where(p => p.Cart == cart).Select(p1 => p1.FinalPrice).Sum();
+            ViewData["TotalCartPrice"] = _context.ProductCart.Where(p => p.CartId == cart.Id).Select(p1 => p1.FinalPrice).Sum();
             return View(cart);
         }
 
@@ -105,7 +105,7 @@ namespace Bram___grocery_store.Controllers
 
         private bool CartExists(int id)
         {
-            return _context.Cart.Any(e => e.UserId == id);
+            return _context.Cart.Any(e => e.Id == id);
         }
     }
 }
