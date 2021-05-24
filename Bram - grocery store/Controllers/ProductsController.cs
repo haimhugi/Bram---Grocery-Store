@@ -34,7 +34,6 @@ namespace Bram___grocery_store.Controllers
         {
             var products = _context.Product.Where(x => x.Name.Contains(product)).OrderBy(x => x.Name);
             return View("../Products/Index", await products.ToListAsync());
-
         }
 
         // GET: Products/Create
@@ -67,7 +66,6 @@ namespace Bram___grocery_store.Controllers
             return View(product);
         }
 
-
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -93,7 +91,6 @@ namespace Bram___grocery_store.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,PhotoUrl,CategoryId")] Product product)

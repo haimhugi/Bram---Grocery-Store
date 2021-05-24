@@ -19,7 +19,6 @@ namespace Bram___grocery_store.Controllers
             _context = context;
         }
 
-
         // GET: ProductCarts
         public async Task<IActionResult> Index()
         {
@@ -65,24 +64,13 @@ namespace Bram___grocery_store.Controllers
             ViewData["ProductId"] = new SelectList(_context.Product, "Id");
             return View(productCart);
         }
-        /*
-                 public IActionResult Create(int? id)
-        {
-            var productInCart = new ProductInCart();
-            productInCart.product = _context.Product.Where(p => p.Id == id).FirstOrDefault();
-            productInCart.ProductId = productInCart.product.Id;
-            productInCart.Amount = 1;
-            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Desc");
-            return View(productInCart);
-        }
-*/
 
         // POST: ProductCarts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPut]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductId,CartId,Amount,FinalPrice")] ProductCart productCart)
+        public async Task<IActionResult> Create([Bind("Id,ProductId,Amount,FinalPrice")] ProductCart productCart)
         {
             productCart.Product = _context.Product.Where(p => p.Id == productCart.ProductId).FirstOrDefault();
             if (HttpContext.Session.GetString("userId") == null)
@@ -123,12 +111,13 @@ namespace Bram___grocery_store.Controllers
                     return View("../Products/Index", _context.Product);
                 }
 
-
                 _context.Add(newProductInCart);
                 await _context.SaveChangesAsync();
                 return View("../Products/Index", _context.Product);
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "Id");
+            // ViewData["ProductId"] = new SelectList(_context.Product, "Id");
+            // ViewData["ProductId"] = new SelectList(_context.Product, "Id", productCart.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id", productCart.ProductId.ToString());
             return View(productCart);
         }
 
