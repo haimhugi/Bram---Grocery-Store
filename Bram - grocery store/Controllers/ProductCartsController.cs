@@ -80,7 +80,7 @@ namespace Bram___grocery_store.Controllers
         // POST: ProductCarts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPut]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ProductId,CartId,Amount,FinalPrice")] ProductCart productCart)
         {
@@ -139,7 +139,7 @@ namespace Bram___grocery_store.Controllers
         {
             if (HttpContext.Session.GetString("userId") == null)
             {
-                return View("../users/LogIn");
+                return View("../users/Login");
             }
             var productInCart = await _context.ProductCart.FindAsync(id);
             _context.ProductCart.Remove(productInCart);

@@ -52,7 +52,6 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Create([Bind("Id,Name,Price,PhotoUrl")] Product product)
         {
             if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("Admin"))
@@ -133,7 +132,6 @@ namespace Bram___grocery_store.Controllers
         }
 
         // GET: Products/Delete/5
-
         public async Task<IActionResult> Delete(int? id)
         {
             if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
@@ -153,16 +151,11 @@ namespace Bram___grocery_store.Controllers
             }
 
             return View(product);
-        }
-
-
-   
+        }   
 
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-
-
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))

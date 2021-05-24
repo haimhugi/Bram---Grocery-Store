@@ -30,11 +30,6 @@ namespace Bram___grocery_store.Controllers
             return View(await _context.User.ToListAsync());
         }
 
-        // GET: Users/Details/5
-
-
-
-
         // GET: Users/Create
         public IActionResult Create()
         {
