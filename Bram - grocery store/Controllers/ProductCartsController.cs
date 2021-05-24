@@ -117,11 +117,11 @@ namespace Bram___grocery_store.Controllers
             }
             // ViewData["ProductId"] = new SelectList(_context.Product, "Id");
             // ViewData["ProductId"] = new SelectList(_context.Product, "Id", productCart.ProductId);
-            ViewData["ProductId"] = new SelectList(_context.Product, "Id", productCart.ProductId.ToString());
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id", productCart.ProductId.ToString(), productCart.ProductId);
             return View(productCart);
         }
 
-        // POST: ProductInCarts/Delete/5
+        // POST: ProductCarts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
