@@ -30,12 +30,12 @@ namespace Bram___grocery_store.Controllers
         // GET: Products/Details/5
         [HttpPost]
         public async Task<IActionResult> Search(string product)
-
         {
             var products = _context.Product.Where(x => x.Name.Contains(product)).OrderBy(x => x.Name);
             return View("../Products/Index", await products.ToListAsync());
         }
 
+        [HttpGet]
         // GET: Products/Create
         public IActionResult Create()
         {
@@ -43,7 +43,11 @@ namespace Bram___grocery_store.Controllers
             {
                 return View("../Products/Index", _context.Product);
             }
-            return View();
+            var category = _context.Category.Where(c => c.Id > 0).FirstOrDefault();
+            if (category == null)
+                category = new Category();
+            var newProduct = new Product() { Category = category };
+            return View(newProduct);
         }
 
         // POST: Products/Create
@@ -51,14 +55,19 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,PhotoUrl")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,PhotoUrl,CategoryId")] Product product)
         {
-            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("Admin"))
+            if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
             {
                 return View("../Products/Index", _context.Product);
             }
             if (ModelState.IsValid)
             {
+                if(product.Category == null)
+                {
+                    product.Category = _context.Category.Where(c => c.Id > 0).FirstOrDefault();
+                    product.CategoryId = product.Category.Id;
+                }
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -148,7 +157,7 @@ namespace Bram___grocery_store.Controllers
             }
 
             return View(product);
-        }   
+        }
 
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]

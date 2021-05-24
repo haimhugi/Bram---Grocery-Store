@@ -181,7 +181,7 @@ namespace Bram___grocery_store.Controllers
             {
                 HttpContext.Session.SetString("userName", answer.UserName);
                 HttpContext.Session.SetString("userId", answer.Id.ToString());    
-                return View("../Products/Index", _context.Product);
+                return Redirect("../Products/Index");
             }
             else
             {
