@@ -61,115 +61,112 @@
 }
 
 
-li {
-    font-size: xx-large;
-    width: 100% !important;
-
-}
-
-.geoli {
-    margin-right: 40px;
-    color: azure;
-}
-
-.pargeolei {
-    text-align: right;
-    font-size: 200% !important;
-    height: 100% !important;
-}
-
-.shaot {
-    width: 30% !important;
-    margin-right: 40px;
-    color: azure;
-}
-
-.parshaot {
-    font-size: 200%;
-    text-align: right;
-    height: 100% !important;
-
-}
-
-.mapa {
-    width: 30% !important;
-    height: 100% !important;
-
-}
-
-.zhoiot {
-    color: azure;
-
-}
-
-span.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='azure' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
-}
-
-
-span.navbar-toggler-icon {
-    border-color: azure !important;
-}
-
-.navbar-toggler {
-    color: azure !important;
-}
-li{
-    width: 200px !important;
-    margin-left: auto;
- }
-
-
-@media screen and (max-width:700px) {
-    .mapa {
-        display: none;
-    }
-
-    .pargeolei {
-        text-align: center;
-    }
-
-    .parshaot {
-        text-align: center;
-    }
-
-    .shaot {
+@media screen {
+    li {
+        font-size: xx-large;
         width: 100% !important;
     }
 }
+    .geoli {
+        margin-right: 40px;
+        color: azure;
+    }
 
-.pagenum {
-    position: relative;
-    float: right;
-    margin-left: 5px;
-    color: white;
-    width: 30%;
-    font-size: x-large;
+    .pargeolei {
+        text-align: right;
+        font-size: 200% !important;
+        height: 100% !important;
+    }
 
-}
+    .shaot {
+        width: 30% !important;
+        margin-right: 40px;
+        color: azure;
+    }
 
-.center {
-    margin: auto;
-}
+    .parshaot {
+        font-size: 200%;
+        text-align: right;
+        height: 100% !important;
+    }
 
-.RTL {
-    direction: rtl;
-}
+    .mapa {
+        width: 30% !important;
+        height: 100% !important;
+    }
 
-.right {
-    float: right;
-}
+    .zhoiot {
+        color: azure;
+    }
 
-.align-right {
-    text-align: right;
-    direction: rtl;
-}
+    span.navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='azure' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+    }
 
-.center {
-    text-align: center;
-}
 
-.myCard:hover {
-    opacity: 0.4;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-}
+    span.navbar-toggler-icon {
+        border-color: azure !important;
+    }
+
+    .navbar-toggler {
+        color: azure !important;
+    }
+
+    li {
+        width: 200px !important;
+        margin-left: auto;
+    }
+
+
+    @media screen and (max-width:700px) {
+        .mapa {
+            display: none;
+        }
+
+        .pargeolei {
+            text-align: center;
+        }
+
+        .parshaot {
+            text-align: center;
+        }
+
+        .shaot {
+            width: 100% !important;
+        }
+    }
+
+    .pagenum {
+        position: relative;
+        float: right;
+        margin-left: 5px;
+        color: white;
+        width: 30%;
+        font-size: x-large;
+    }
+
+    .center {
+        margin: auto;
+    }
+
+    .RTL {
+        direction: rtl;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .align-right {
+        text-align: right;
+        direction: rtl;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .myCard:hover {
+        opacity: 0.4;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
