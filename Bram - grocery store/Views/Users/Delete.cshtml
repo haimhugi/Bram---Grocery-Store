@@ -11,12 +11,11 @@
         <div class="col-sm bg-light" style="opacity:0.85; text-align:right; margin:10px; direction:rtl">
             <h3 style="text-align:center;">Are you sure you want to delete?</h3>
             <hr />
-            <p><strong>עיר:  </strong>@Model.FirstName</p>
-            <p><strong>רחוב:  </strong>@Model.LastName</p>
-            <p><strong>שם:  </strong>@Model.UserName</p>
+            <p><strong>שם פרטי:  </strong>@Model.FirstName</p>
+            <p><strong>שם משפחה:  </strong>@Model.LastName</p>
+            <p><strong>שם משתמש:  </strong>@Model.UserName</p>
             <p><strong>סיסמה:  </strong>@Model.Password</p>
             <p><strong>אימייל:  </strong>@Model.Email</p>
-
             <br />
 
             <form asp-action="Delete">
