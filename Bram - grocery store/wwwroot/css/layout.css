@@ -114,14 +114,11 @@ span.navbar-toggler-icon {
 .navbar-toggler {
     color: azure !important;
 }
+li{
+    width: 200px !important;
+    margin-left: auto;
+ }
 
-
-@media screen and (max-width:1200px) {
-    li {
-        width: 200px !important;
-        margin-left: auto;
-    }
-}
 
 @media screen and (max-width:700px) {
     .mapa {
