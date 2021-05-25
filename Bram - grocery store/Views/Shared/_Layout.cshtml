@@ -31,31 +31,34 @@
             " class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                @if (Context.Session.GetString("userId") == null)
+                {
+                    <form class="col-1 nav-item">
+                        <a style="color:azure;" class="nav-link active" asp-area="" asp-controller="Users" asp-action="Login">התחברות</a>
+                    </form>
+                }
+                @if (Context.Session.GetString("userId") != null)
+                {
+                    <form class="col-1 nav-item">
+                        <a style="color:azure;" class="nav-link active" asp-area="" asp-controller="Users" asp-action="Logout">התנתק</a>
+                    </form>
+                }
                 <div class="navim">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        @if (Context.Session.GetString("userId") != null)
-                        {
-                            <li class="col-1 nav-item">
-                                <a style="color:azure;" class="nav-link active"
-                                   asp-area="" asp-controller="Users" asp-action="Logout">התנתק</a>
-
-                            </li>
-                        }
                         @if (Context.Session.GetString("userId") == null)
                         {
                             <li class="col-4">
 
                             </li>
                         }
-                        @if (Context.Session.GetString("userId") != null && Context.Session.GetString("userName") !="admin")
+                        @if (Context.Session.GetString("userId") != null && Context.Session.GetString("userName") != "admin")
                         {
                             <li class="col-1">
 
                             </li>
                         }
 
-
-                        @if (Context.Session.GetString("userId") != null &&Context.Session.GetString("userName").Equals("admin"))
+                        @if (Context.Session.GetString("userId") != null && Context.Session.GetString("userName").Equals("admin"))
                         {
                             <li class="col-1 nav-item">
                                 <a style="color:azure;" class="nav-link active" asp-area="" asp-controller="Users"
@@ -79,31 +82,19 @@
                             </li>
 
                         }
+
                         <li class="col-1 nav-item">
-                            <a asp-area="" asp-controller="Products" asp-action="Index" style="color:azure;" class="nav-link active">דף הבית</a>
+                            <a asp-area="" asp-controller="Products" asp-action="Index" style="color:azure;" class="nav-link active">מוצרים</a>
                         </li>
-
-                        @if (Context.Session.GetString("userId") == null)
-                        {
-                            <li class="col-1 nav-item">
-                                <a style="color:azure;" class="nav-link active"
-                                   asp-area="" asp-controller="Users" asp-action="Login">התחבר</a>
-
-                            </li>
-                        }
-
-
+                        <li class="col-1 nav-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" style="color:azure;" class="nav-link active">דף הבית</a>
+                        </li>
                     </ul>
                 </div>
-                @*
-            <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index" style="float:right">
-                <img style="height:50px;" src="/pics/logo.png" />
-            </a>*@
-
                 <form class="d-flex searchi" asp-controller="Products" asp-action="Search">
                     <input class="form-control me-2" asp-controller="Products" asp-action="Search" type="search"
                            placeholder="חיפוש מוצר..." aria-label="Search" name="product">
-                    <button style="color:azure;" class="btn btn-gree btn-outline-success" type="submit">Search</button>
+                    <button style="color:azure;" class="btn btn-gree btn-outline-success" type="submit">חפש</button>
                 </form>
             </div>
         </div>
