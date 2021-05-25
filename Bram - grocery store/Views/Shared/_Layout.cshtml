@@ -27,7 +27,8 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation" style="margin-left: auto;">
-                <span style=" border-color:azure !important;" class="navbar-toggler-icon"></span>
+                <span style=" border-color:azure !important;
+            " class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navim">
@@ -46,8 +47,7 @@
 
                             </li>
                         }
-                        @if (Context.Session.GetString("userId") != null && Context.Session.GetString("userName") !=
-              "admin")
+                        @if (Context.Session.GetString("userId") != null && Context.Session.GetString("userName") !="admin")
                         {
                             <li class="col-1">
 
@@ -55,8 +55,7 @@
                         }
 
 
-                        @if (Context.Session.GetString("userId") != null &&
-              Context.Session.GetString("userName").Equals("admin"))
+                        @if (Context.Session.GetString("userId") != null &&Context.Session.GetString("userName").Equals("admin"))
                         {
                             <li class="col-1 nav-item">
                                 <a style="color:azure;" class="nav-link active" asp-area="" asp-controller="Users"
@@ -97,9 +96,9 @@
                     </ul>
                 </div>
                 @*
-        <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index" style="float:right">
-            <img style="height:50px;" src="/pics/logo.png" />
-        </a>*@
+            <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index" style="float:right">
+                <img style="height:50px;" src="/pics/logo.png" />
+            </a>*@
 
                 <form class="d-flex searchi" asp-controller="Products" asp-action="Search">
                     <input class="form-control me-2" asp-controller="Products" asp-action="Search" type="search"
