@@ -89,6 +89,7 @@ namespace Bram___grocery_store.Controllers
                         UserId = int.Parse(HttpContext.Session.GetString("userId")),
                         User = _context.User.Where(u => u.Id == int.Parse(HttpContext.Session.GetString("userId"))).FirstOrDefault()
                     };
+                    myNewShoppingCart.ProductsCart.Add(productCart);
                     _context.Add(myNewShoppingCart);
                     await _context.SaveChangesAsync();
                     myShoppingCartId = myNewShoppingCart.Id.ToString();

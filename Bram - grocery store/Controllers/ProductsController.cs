@@ -44,8 +44,7 @@ namespace Bram___grocery_store.Controllers
                 return View("../Products/Index", _context.Product);
             }
 
-            var newProduct = new Product() { };
-            return View(newProduct);
+            return View();
         }
 
         // POST: Products/Create
