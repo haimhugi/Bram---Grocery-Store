@@ -115,9 +115,8 @@ namespace Bram___grocery_store.Controllers
                 await _context.SaveChangesAsync();
                 return View("../Products/Index", _context.Product);
             }
-            // ViewData["ProductId"] = new SelectList(_context.Product, "Id");
             // ViewData["ProductId"] = new SelectList(_context.Product, "Id", productCart.ProductId);
-            ViewData["ProductId"] = new SelectList(_context.Product, "Id", productCart.ProductId.ToString(), productCart.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "Id");
             return View(productCart);
         }
 
