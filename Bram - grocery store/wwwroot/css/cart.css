@@ -30,7 +30,6 @@ body {
     background-color: rgb(16, 124, 28) !important;
     margin-top: 20px !important;
     width: 100% !important;
-
     height: auto;
 }
 
@@ -270,7 +269,7 @@ span.navbar-toggler-icon {
 
 .sahacol {
     position: relative;
-    width: fit-content;
+    width: fit-content();
     display: block;
     text-align: right;
 }

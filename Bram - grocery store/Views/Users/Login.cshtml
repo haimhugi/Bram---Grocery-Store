@@ -62,21 +62,11 @@
     </div>
 
     <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
 
-    <form asp-controller="Users" asp-action="Create" class="mb-3">
+    <form asp-controller="Users" asp-action="Create" class="mb-3" style="margin-top: 5%">
         <input style="background-color: rgb(16, 124, 28) !important; width: 100%" type="submit" value="Register" class="btn btn-success" />
     </form>
 </div>
-
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
