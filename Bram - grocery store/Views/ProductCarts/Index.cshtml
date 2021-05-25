@@ -4,83 +4,97 @@
     ViewData["Title"] = "Index";
 }
 
-<h2 class="text-center p-3 mt-3 bg-light opacity rounded-1 text-danger font-weight-bold">העגלה שלי</h2>
+@section css {
+    <link href="@Url.Content("~/css/cart.css")" rel="stylesheet" />
+}
+
+<h2 class="text-center p-3 mt-3 bg-light opacity rounded-1 font-weight-bold">העגלה שלי</h2>
 
 <p>
     <a class="btn btn-success" style="color:azure !important; background-color: rgb(16, 124, 28) !important;" asp-controller="Products" asp-action="Index">הוסף מוצר נוסף</a>
 </p>
 
 <div class="container">
-    <div class="row">
-        <div class="col-8">
-            @foreach (var item in Model)
-            {
-                <div class="row mb-4 border bg-light opacity text-danger">
-                    <div class="col-md-5 col-lg-3 col-xl-3 border">
-                        <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                            <img class="img-fluid w-70"
-                                 src="@item.Product.PhotoUrl" alt="Sample">
-                        </div>
-                    </div>
-                    <div class="col-md-7 col-lg-9 col-xl-9 border">
-                        <table class="table" style="margin: 0;">
-                            <tr>
-                                <td class="font-weight-bold  text-danger" style="text-align:right; direction:rtl;">
-                                    @item.Product.Name
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class=" text-danger" style="text-align:right; direction:rtl;">
-                                    @item.FinalPrice
-                                    <i class="fa fa-ils" aria-hidden="true"></i>
-                                </td>
-                                <td class="font-weight-bold  text-danger" style="text-align:right; direction:rtl;">
-                                    מחיר
-                                </td>
-                                <td class=" text-danger" style="text-align:right; direction:rtl;">
-                                    @item.Amount
-                                </td>
-                                <td class="font-weight-bold  text-danger" style="text-align:right; direction:rtl;">
-                                    כמות
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <form asp-controller="ProductCarts" asp-action="Delete" asp-route-id="@item.Id" class="mb-3">
-                                        <input type="submit" value="הסרה" class="btn btn-success btn-block opacity rounded-0" />
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+    <div class="row coteret">
 
-            }
+        <div class="col-sm align">
+            <h2>סכום ביניים</h2>
         </div>
-        <div class="col-4 opacity">
-            <div class="bg-light opacity p-3">
-                <br />
-                <h1 class="font-weight-bold  text-danger text-center" style=" direction:rtl;">
-                    סה''כ לתשלום
-                </h1>
-                <hr />
-                <hr />
-                <h2 class="text-danger text-center" style=" direction:rtl;">
-                    <script type="text/javascript">
+        <div class="col-sm align">
+            <h2>כמות</h2>
+        </div>
+        <div class="col-sm align">
+            <h2>מחיר</h2>
+        </div>
+        <div class="col-sm align">
+            <h2>מוצר</h2>
+        </div>
+        <div class="col-sm align">
+        </div>
+        <div class="col-sm align">
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-sm align">
+                <h4>@item.FinalPrice ₪</h4>
+                <i class="fa fa-ils" aria-hidden="true"></i>
+            </div>
+            <div class="col-sm align">
+                <h4>  @item.Amount</h4>
+            </div>
+            <div class="col-sm align">
+                <h4>@item.Product.Price ₪</h4>
+            </div>
+            <div class="col-sm align">
+                <h4> @item.Product.Name</h4>
+            </div>
+            <div class="col-sm align">
+                <img class="img-fluid"
+                     src="@item.Product.PhotoUrl" alt="Sample">
+            </div>
+            <div class="col-sm  align">
+                <form asp-controller="ProductCarts" asp-action="Delete" asp-route-id="@item.Id" class="mb-3">
+                    <input type="submit" value="הסרה" class="btn btn-danger btn-block opacity rounded-0 deletebt"> @* <img src="/pics/remove icon.png" class="imgremove">*@
+                </form>
+            </div>
+
+        </div>
+
+    }
+
+
+
+
+    <div style="margin-top:8%" class="row ">
+        <div class="col-sm align">
+            <form asp-controller="Carts" asp-action="Details" asp-route-id="@Model.First().CartId" class="mb-3">
+                <input type="submit" value="סיום קנייה" class="btn btn-success" style="width: 100%;" />
+            </form>
+        </div>
+        <div class="col-sm align">
+        </div>
+        <div class="col-sm align">
+        </div>
+        <div class="col-sm align">
+            <h4 style=" width:50% !important; margin-bottom: 10%;;font-weight: normal;">
+                <script type="text/javascript">
                        (function () {
                            var finalPrice = @Model.Sum(p=>p.Amount*p.Product.Price)
                                document.write(finalPrice.toPrecision(3));
 
                        })();
-                    </script>
-                    <i class="fa fa-ils" aria-hidden="true"></i>
-                </h2>
-                <br />
-                <form asp-controller="Carts" asp-action="Details" asp-route-id="@Model.First().CartId" class="mb-3">
-                    <input type="submit" value="סיום קנייה" class="btn btn-success btn-block opacity rounded-0" />
-                </form>
-            </div>
-
+                </script>
+                <i class="fa fa-ils" aria-hidden="true"></i>
+                ₪
+            </h4>
         </div>
+        <div class="col-sm align">
+        </div>
+        <div class="col-sm  align">
+            <h3 direction: rtl;">סך הכל לתשלום:</h3>
+        </div>
+
     </div>
 </div>
