@@ -8,39 +8,37 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm">
-        </div>
         <div class="col-sm bg-light" style="opacity:0.80; font-weight:bold; margin:11px;">
-            <h2 style="text-align:center;" class="text-danger">הרשמה</h2>
+            <h1 style="direction: rtl; margin-bottom: 6%; text-align: center;">הרשמה</h1>
             <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="FirstName" class="control-label">שם פרטי</label>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                <div asp-validation-summary="ModelOnly" ></div>
+                <div class="form-group row align-items-end" style="margin-bottom: 2%;">
+                    <label asp-for="FirstName" style="font-size: x-large;" class="control-label RTL right">  שם פרטי  <input asp-for="FirstName" class="form-control" /></label>
+                  
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+                <div class="form-group row align-items-end" style="margin-bottom: 2%;">
+                    <label asp-for="LastName" style="font-size: x-large;" class="control-label RTL right">שם משפחה   <input asp-for="LastName" class="form-control" /></label>
+                  
+                    <span asp-validation-for="LastName" ></span>
+                </div>
+                <div class="form-group row align-items-end" style="margin-bottom: 2%;">
+                    <label asp-for="UserName" style="font-size: x-large;" class="control-label RTL right">שם משתמש <input asp-for="UserName" class="form-control" /></label>
+                    
+                    <span asp-validation-for="UserName"></span>
+                </div>
+                <div class="form-group row align-items-end" style="margin-bottom: 2%;">
+                    <label asp-for="Password" style="font-size: x-large;" class="control-label RTL right">סיסמה   <input asp-for="Password" class="form-control" />
+</label>
+                    <span asp-validation-for="Password" ></span>
+                </div>
+                <div class="form-group row align-items-end" style="margin-bottom: 2%;">
+                    <label asp-for="Email" style="font-size: x-large;" class="control-label RTL right">אימייל <input asp-for="Email" class="form-control" /></label>
+                    
+                    <span asp-validation-for="Email" ></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="LastName" class="control-label">שם משפחה</label>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UserName" class="control-label">שם משתמש</label>
-                    <input asp-for="UserName" class="form-control" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label">סיסמה</label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label">אימייל</label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Save"  style="background-color: rgb(16, 124, 28) !important;  float: right; width: 100%"  class="btn btn-success" />
                 </div>
             </form>
             @if (ViewData["Error"] != null)
@@ -49,8 +47,6 @@
                 <div style="color:red; text-align:center" class="RTL text-danger">@ViewData["Error"]</div>
                 <br />
             }
-        </div>
-        <div class="col-sm">
         </div>
     </div>
 </div>
