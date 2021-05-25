@@ -11,39 +11,43 @@
 </p>
 <table class="table table-striped bg-light opacity">
     <thead>
-        <tr>
-            <th scope="col" class="text-right font-weight-boldt text-danger">כלי ניהול</th>
-            <th scope="col" class="text-right font-weight-boldt text-danger">שם פרטי</th>
-            <th scope="col" class="text-right font-weight-boldt text-danger">שם משפחה</th>
-            <th scope="col" class="text-right font-weight-boldt text-danger">שם משתמש</th>
-            <th scope="col" class="text-right font-weight-boldt text-danger">סיסמה</th>
-            <th scope="col" class="text-right font-weight-boldt text-danger">אימייל</th>
+        <tr >
+            <th scope="col" class="text-right font-weight-boldt">כלי ניהול</th>
+            <th scope="col" class="text-right font-weight-boldt ">סיסמה</th>
+            <th scope="col" class="text-right font-weight-boldt ">אימייל</th>
+            <th scope="col" class="text-right font-weight-boldt ">שם משפחה</th>
+            <th scope="col" class="text-right font-weight-boldt">שם פרטי</th>
+            <th scope="col" class="text-right font-weight-boldt ">שם משתמש</th>
+
         </tr>
     </thead>
-    <tbody class="text-danger">
+    <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td class="text-right font-weight-bold">
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-                <td class="text-right font-weight-bold">
-                    @item.FirstName
-                </td>
-                <td class=" text-right font-weight-bold">
-                    @item.LastName
-                </td>
-                <td class="text-right font-weight-bold">
-                    @item.Password
-                </td>
-                <td class="text-right font-weight-bold">
-                    @item.Email
-                </td>
-                <td class="text-right font-weight-bold">
-                    @item.UserName
-                </td>
-            </tr>
+        <tr>
+            <td class="text-right font-weight-bold">
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+
+
+            <td class="text-right font-weight-bold">
+                @item.Password
+            </td>
+            <td class="text-right font-weight-bold">
+                @item.Email
+            </td>
+            <td class=" text-right font-weight-bold">
+                @item.LastName
+            </td>
+            <td class="text-right font-weight-bold">
+                @item.FirstName
+            </td>
+            <td class="text-right font-weight-bold">
+                @item.UserName
+            </td>
+
+        </tr>
         }
     </tbody>
 </table>
