@@ -100,6 +100,7 @@ namespace Bram___grocery_store.Controllers
             var cart = await _context.Cart.FindAsync(id);
             _context.Cart.Remove(cart);
             await _context.SaveChangesAsync();
+            HttpContext.Session.SetString("CartId", "Deleted");
             return RedirectToAction(nameof(Index));
         }
 

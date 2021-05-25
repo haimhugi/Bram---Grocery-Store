@@ -80,7 +80,7 @@ namespace Bram___grocery_store.Controllers
             if (ModelState.IsValid)
             {
                 var myShoppingCartId = HttpContext.Session.GetString("CartId");
-                if (myShoppingCartId == null)
+                if (myShoppingCartId == null || myShoppingCartId == "Deleted")
                 {
                     var myNewShoppingCart = new Cart()
                     {
