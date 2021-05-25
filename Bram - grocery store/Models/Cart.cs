@@ -14,6 +14,8 @@ namespace Bram___grocery_store.Models
     {
         public int Id { get; set; }
 
+        public DateTime DateCreate { get; set; }
+
         [Display(Name = "Choose User: ")]
         public int UserId { get; set; }
         

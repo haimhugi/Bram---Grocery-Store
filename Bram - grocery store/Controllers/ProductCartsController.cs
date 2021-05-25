@@ -84,6 +84,7 @@ namespace Bram___grocery_store.Controllers
                 {
                     var myNewShoppingCart = new Cart()
                     {
+                        DateCreate = DateTime.Now,
                         ProductsCart = new System.Collections.ObjectModel.ObservableCollection<ProductCart>(),
                         UserId = int.Parse(HttpContext.Session.GetString("userId")),
                         User = _context.User.Where(u => u.Id == int.Parse(HttpContext.Session.GetString("userId"))).FirstOrDefault()
