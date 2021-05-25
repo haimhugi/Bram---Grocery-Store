@@ -36,7 +36,7 @@
                 @if (Context.Session.GetString("userId") == null)
                 {
                     <form class="col-1 nav-item">
-                        <a style="color:azure;" class="nav-link active" asp-area="" asp-controller="Users" asp-action="Login">התחבר</a>
+                        <a style="color:azure;" class="nav-link active" asp-area="" asp-controller="Users" asp-action="Login">התחברות/הרשמה</a>
                     </form>
                 }
                 @if (Context.Session.GetString("userId") != null)
@@ -114,13 +114,13 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start foot">
+    <footer class="bg-light text-center text-lg-start foot border-top">
         <!-- Grid container -->
-        <div class="container p-3">
+        <div class="container">
             <!--Grid row-->
             <div class="row">
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4 mb-md-0 geoli">
+                <div class="col-lg-3 col-md-3 mb-3 mb-md-0 geoli">
                     <p class="pargeolei">
                         גאולי תימן
                         <br />
@@ -131,7 +131,7 @@
                         bram@gmail.com
                     </p>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4 mb-md-0 shaot">
+                <div class="col-lg-3 col-md-3 mb-3 mb-md-0 shaot">
                     <p class="parshaot">
                         :שעות פעילות
                         <br />
@@ -142,10 +142,10 @@
                         שבת : סגור
                     </p>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4 mb-md-0 mapa">
+                <div class="col-lg-3 col-md-3 mb-3 mb-md-0 mapa">
                     <div class="mapouter" style="margin-left: 20px;">
                         <div class="gmap_canvas">
-                            <iframe width="458" height="200" id="gmap_canvas"
+                            <iframe width="458" height="222" id="gmap_canvas"
                                     src="https://maps.google.com/maps?q=%D7%92%D7%90%D7%95%D7%9C%D7%99%20%D7%AA%D7%99%D7%9E%D7%9F&t=&z=11&ie=UTF8&iwloc=&output=embed"
                                     frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org"></a><br>
                             <style>

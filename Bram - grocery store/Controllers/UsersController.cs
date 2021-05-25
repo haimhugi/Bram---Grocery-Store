@@ -186,7 +186,7 @@ namespace Bram___grocery_store.Controllers
             }
             else
             {
-                ViewData["Error"] = "משתמש לא קיים במערכת נא להירשם!";
+                ViewData["Error"] = "שם המשתמש אינו קיים במערכת, או שהסיסמא אינה נכונה.";
             }
             return View();
         }
