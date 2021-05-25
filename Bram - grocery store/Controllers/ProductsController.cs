@@ -43,10 +43,8 @@ namespace Bram___grocery_store.Controllers
             {
                 return View("../Products/Index", _context.Product);
             }
-            var category = _context.Category.Where(c => c.Id > 0).FirstOrDefault();
-            if (category == null)
-                category = new Category();
-            var newProduct = new Product() { Category = category };
+
+            var newProduct = new Product() { };
             return View(newProduct);
         }
 
@@ -55,7 +53,7 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,PhotoUrl,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,PhotoUrl")] Product product)
         {
             if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
             {
@@ -63,11 +61,6 @@ namespace Bram___grocery_store.Controllers
             }
             if (ModelState.IsValid)
             {
-                if(product.Category == null)
-                {
-                    product.Category = _context.Category.Where(c => c.Id > 0).FirstOrDefault();
-                    product.CategoryId = product.Category.Id;
-                }
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -93,7 +86,6 @@ namespace Bram___grocery_store.Controllers
                 return NotFound();
             }
 
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -102,7 +94,7 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,PhotoUrl,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,PhotoUrl")] Product product)
         {
             if (HttpContext.Session.GetString("userName") == null || !HttpContext.Session.GetString("userName").Equals("admin"))
             {

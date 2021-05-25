@@ -37,32 +37,12 @@ namespace Bram___grocery_store.Migrations
                     b.ToTable("Cart");
                 });
 
-            modelBuilder.Entity("Bram___grocery_store.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
             modelBuilder.Entity("Bram___grocery_store.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -76,8 +56,6 @@ namespace Bram___grocery_store.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
                 });
@@ -155,17 +133,6 @@ namespace Bram___grocery_store.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Bram___grocery_store.Models.Product", b =>
-                {
-                    b.HasOne("Bram___grocery_store.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("Bram___grocery_store.Models.ProductCart", b =>
                 {
                     b.HasOne("Bram___grocery_store.Models.Cart", "Cart")
@@ -188,11 +155,6 @@ namespace Bram___grocery_store.Migrations
             modelBuilder.Entity("Bram___grocery_store.Models.Cart", b =>
                 {
                     b.Navigation("ProductsCart");
-                });
-
-            modelBuilder.Entity("Bram___grocery_store.Models.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Bram___grocery_store.Models.Product", b =>

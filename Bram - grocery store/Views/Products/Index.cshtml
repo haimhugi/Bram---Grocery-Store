@@ -5,53 +5,50 @@
     ViewData["Title"] = "Index";
 }
 
+    @section css {
+        <link href="@Url.Content("~/css/products.css")" rel="stylesheet" />
+    }
+
+
 @if (Context.Session.GetString("userName") != null && Context.Session.GetString("userName").Equals("admin"))
 {
     <p class="center">
-        <a class="btn btn-light text-danger opacity font-weight-bold m-3 pt-2" style="width:50%; margin-right:25%!important; margin-left:25%!important;" asp-action="Create">הוסף מוצר חדש</a>
+        <a class="btn btn-success" style="width: 50%; margin-right: 25% !important; background-color: rgb(16, 124, 28) !important;"
+           asp-controller="Products" asp-action="Create">הוסף מוצר חדש</a>
     </p>
 }
 
 <div class="container-md">
     <div class="row p-3">
-        @foreach (var item in Model)
+       @foreach (var item in Model)
         {
 
-            <div class="btn col-lg-3 col-md-3 col-sm-4 p-2 ">
-                <div class="card p-3 bg-light center myCard" style="opacity:0.85; font-weight:bold;">
-                    <a asp-controller="ProductCarts" asp-action="Create" asp-route-id="@item.Id" style="text-decoration: none !important;">
+        <div class="col-lg-2 col-md-4 col-sm-6">
 
-                        <img class="card-img-top productImg" src="@item.PhotoUrl" alt="Card image cap">
-                        <div class=" text-danger" style="text-align: center;">
-                            <div class="row" style="flex-wrap: unset !important;">
-                                <div class="col-4">
-                                    <i class="fa fa-ils" aria-hidden="true"></i> @item.Price
-                                </div>
-                                <div class="col-0 text-center">
-                                    |
-                                </div>
-                                <div class="col-8">
-                                    @item.Name
-                                </div>
-                            </div>
-
-                        </div>
-                    </a>
-                    @if (Context.Session.GetString("userName") != null && Context.Session.GetString("userName").Equals("admin"))
-                    {
-                        <div class="row pt-3 pb-0">
-                            <div class="col-6 p-0">
-                                <a class="btn btn-block btn-success rounded-0" style="opacity:0.4;" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id">עריכה</a>
-                            </div>
-                            <div class="col-6 p-0">
-                                <a class="btn btn-block btn-success rounded-0" style="opacity:0.4;" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
-                            </div>
-                        </div>
-                    }
+            <a asp-controller="ProductCarts" asp-action="Create" asp-route-id="@item.Id" style="text-decoration: none !important;">
+                <div class="card text-center" style="width: 18rem;">
+                    <img class="card-img-top" src="@item.PhotoUrl" alt="Card image cap" style="width:100%" important!>
+                    <div class="card-body">
+                        <h5 class="card-title"> @item.Name </h5>
+                        <p class="card-text">₪ @item.Price</p>
+                    </div>
                 </div>
-            </div>
+            </a>
 
+            @if (Context.Session.GetString("userName") != null && Context.Session.GetString("userName").Equals("admin"))
+            {
+                <div class="row pt-3 pb-0">
+                    <div class="col-6 p-0">
+                        <a class="btn btn-block btn-success rounded-0" style="opacity:0.4;" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id">עריכה</a>
+                    </div>
+                    <div class="col-6 p-0">
+                        <a class="btn btn-block btn-success rounded-0" style="opacity:0.4;" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
+                    </div>
+                </div>
+            }
+         </div>
         }
+
     </div>
 </div>
 
