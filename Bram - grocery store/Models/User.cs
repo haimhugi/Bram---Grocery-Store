@@ -37,7 +37,7 @@ namespace Bram___grocery_store.Models
         [Display(Name = "Enter Mail")]
         public string Email { get; set; }
 
-        public Cart Cart { get; set; }
+        public List<Cart> Cart { get; set; }
 
     }
 }

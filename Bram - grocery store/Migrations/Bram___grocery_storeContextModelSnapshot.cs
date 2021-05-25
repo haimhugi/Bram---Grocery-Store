@@ -20,11 +20,10 @@ namespace Bram___grocery_store.Migrations
 
             modelBuilder.Entity("Bram___grocery_store.Models.Cart", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
@@ -32,7 +31,12 @@ namespace Bram___grocery_store.Migrations
                     b.Property<float>("TotalCartPrice")
                         .HasColumnType("real");
 
-                    b.HasKey("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cart");
                 });
@@ -125,8 +129,8 @@ namespace Bram___grocery_store.Migrations
             modelBuilder.Entity("Bram___grocery_store.Models.Cart", b =>
                 {
                     b.HasOne("Bram___grocery_store.Models.User", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("Bram___grocery_store.Models.Cart", "UserId")
+                        .WithMany("Cart")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

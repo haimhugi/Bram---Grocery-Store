@@ -41,7 +41,7 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,UserName,Password,IsAdmin,Email")] User user)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,UserName,Password,Email")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace Bram___grocery_store.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,UserName,Password,IsAdmin,Email")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,UserName,Password,Email")] User user)
         {
             if (HttpContext.Session.GetString("userId") == null)
             {
@@ -112,6 +112,7 @@ namespace Bram___grocery_store.Controllers
                     }
                     else
                     {
+                        user.Id = int.Parse(HttpContext.Session.GetString("userId"));
                         _context.Update(user);
                         await _context.SaveChangesAsync();
                         return View("../Products/Index", _context.Product);
