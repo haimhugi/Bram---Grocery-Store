@@ -76,7 +76,11 @@ namespace Bram___grocery_store.Controllers
             {
                 return View("../Products/Index", _context.Product);
             }
-            var user = await _context.User.FindAsync(Int32.Parse(HttpContext.Session.GetString("userId")));
+            if (!HttpContext.Session.GetString("userName").Equals("admin") || (id == null))
+            {
+                id = Int32.Parse(HttpContext.Session.GetString("userId"));
+            }
+            var user = await _context.User.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -172,6 +176,7 @@ namespace Bram___grocery_store.Controllers
             ViewData["CartId"] = new SelectList(_context.Cart, "Id", "Id");
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([Bind("Id,UserName,Password")] User user)
