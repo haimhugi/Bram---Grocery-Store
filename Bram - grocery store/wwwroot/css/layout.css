@@ -1,5 +1,7 @@
 ﻿body {
     zoom: 70%;
+    min-height: 100%;
+    margin-bottom: -12%;
 }
 
 .nav123 {
@@ -25,75 +27,126 @@
     margin-left: auto !important;
 }
 
+/*
+@media screen and (max-width:992px) {
+    body {
+        margin-bottom:50%;
+    }
+}*/
 
+html{
+    position:relative;
+    min-height: 100%;
 
+}
+
+.Site{
+margin: 0 0 38vh !important;
+}
+
+.mapouter{
+    padding-top: 4vh;
+}
 .foot {
+    background-color: rgb(16, 124, 28) !important;
     position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 38vh;
+    width: 100% !important;
+    /*position: absolute;
     bottom: 0;
     background-color: rgb(16, 124, 28) !important;
     margin-top: 10% !important;
-    width: 100% !important;
+    width: 100% !important;*/
 }
 
-.card {
-    width: 100% !important;
-    height: 100% !important;
-    padding-top: 60px !important;
-}
+    .card {
+        width: 100% !important;
+        height: 100% !important;
+        padding-top: 60px !important;
+    }
 
 .card-img-top {
     width: 100% !important;
-    height: 100% !important;
+    height: 250px !important;
 }
 
-.col-lg-2 {
-    margin-top: 20px !important;
-    margin-bottom: 20px !important;
-}
-
-.btn {
-    text-align: center !important;
-    background-color: rgb(16, 124, 28) !important;
-}
-
-.container-fluid {
-    background-color: rgb(16, 124, 28) !important;
-}
-
-
-@media screen {
-    li {
-        font-size: xx-large;
-        width: 100% !important;
-    }
-}
-    .geoli {
-        margin-right: 40px;
-        color: azure;
+    .col-lg-2 {
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
     }
 
-    .pargeolei {
+    .btn {
+        text-align: center !important;
+        background-color: rgb(16, 124, 28) !important;
+    }
+
+    .container-fluid {
+        background-color: rgb(16, 124, 28) !important;
+    }
+
+
+  @media screen {
+        li {
+            font-size: xx-large;
+            width: 100% !important;
+        }
+    }
+
+.geoli {
+    margin-right: 40px;
+    color: azure;
+}
+
+.pargeolei {
         text-align: right;
-        font-size: 110% !important;
+        font-size: 160% !important;
         height: 100% !important;
-    }
+}
 
+@media screen and (min-width:767px) {
+    .geoli {
+        padding-top: 4vh;
+        font-size:
+    }
+    .shaot {
+        padding-top: 4vh;
+    }
+ }
     .shaot {
         width: 30% !important;
         margin-right: 40px;
         color: azure;
     }
 
-    .parshaot {
-        font-size: 110%;
-        text-align: right;
-        height: 100% !important;
+.parshaot {
+    font-size: 160%;
+    text-align: right;
+    height: 100% !important;
+
+}
+
+
+@media screen and (min-width:701px) and (max-width: 767px) {
+    .shaot {
+        display: none;
     }
+    .pargeolei {
+    text-align: center;
+    }
+}
+
 
     .mapa {
         width: 30% !important;
         height: 100% !important;
     }
+@media screen and (max-width:847px) {
+    .mapa {
+    display:none;
+    }
+}
 
     .zhoiot {
         color: azure;
@@ -109,9 +162,9 @@
         border-color: azure !important;
     }
 
-.navbar-toggler {
-    color: azure !important;
-}
+    .navbar-toggler {
+        color: azure !important;
+    }
 
     li {
         width: 200px !important;
@@ -146,9 +199,9 @@
         font-size: x-large;
     }
 
-    .center {
-        margin: auto;
-    }
+.center {
+    margin: auto;
+}
 
     .RTL {
         direction: rtl;
@@ -164,7 +217,7 @@
     }
 
     .center {
-        text-align: center;
+        text-align: end;
     }
 
     .myCard:hover {
