@@ -21,8 +21,6 @@ namespace Bram___grocery_store.Models
         [Display(Name = "Photo Product Url: ")]
         public string PhotoUrl { get; set; }
 
-
-
         public List<ProductCart> ProductCarts { get; set; }
 
     }

@@ -54,7 +54,7 @@ namespace Bram___grocery_store.Controllers
                 var answer = _context.User.Where(x => x.UserName == user.UserName);
                 if (answer.Count() > 0)
                 {
-                    ViewData["Error"] = "The username you selected was caught, please choose another name";
+                    ViewData["Error"] = "שם המשתמש תפוס, אנא בחר שם משתמש אחר.";
                     return View(user);
                 }
                 else
@@ -111,7 +111,7 @@ namespace Bram___grocery_store.Controllers
                     var answer = _context.User.Where(x => x.UserName == user.UserName);
                     if (answer.Count() > 0 && user.UserName != HttpContext.Session.GetString("userName"))
                     {
-                        ViewData["Error"] = "The username you selected was caught, please choose another name";
+                        ViewData["Error"] = "שם המשתמש תפוס, אנא בחר שם משתמש אחר.";
                         return View(user);
                     }
                     else

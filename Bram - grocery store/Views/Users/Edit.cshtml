@@ -1,9 +1,10 @@
-﻿@model Bram___grocery_store.Models.User
+﻿@using Microsoft.AspNetCore.Http
+
+@model Bram___grocery_store.Models.User
 
 @{
     ViewData["Title"] = "Edit";
 }
-
 
 
 <div class="container">
@@ -11,34 +12,35 @@
         <div class="col-sm bg-light" style="opacity:0.80; font-weight:bold; margin:11px;">
             <h1 style="direction: rtl; margin-bottom: 6%; text-align: center;">הרשמה</h1>
             <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" ></div>
+                <div asp-validation-summary="ModelOnly"></div>
                 <div class="form-group row align-items-end" style="margin-bottom: 2%;">
                     <label asp-for="FirstName" style="font-size: x-large;" class="control-label RTL right">  שם פרטי  <input asp-for="FirstName" class="form-control" /></label>
-                  
+
                     <span asp-validation-for="FirstName"></span>
                 </div>
                 <div class="form-group row align-items-end" style="margin-bottom: 2%;">
                     <label asp-for="LastName" style="font-size: x-large;" class="control-label RTL right">שם משפחה   <input asp-for="LastName" class="form-control" /></label>
-                  
-                    <span asp-validation-for="LastName" ></span>
+
+                    <span asp-validation-for="LastName"></span>
                 </div>
                 <div class="form-group row align-items-end" style="margin-bottom: 2%;">
                     <label asp-for="UserName" style="font-size: x-large;" class="control-label RTL right">שם משתמש <input asp-for="UserName" class="form-control" /></label>
-                    
+
                     <span asp-validation-for="UserName"></span>
                 </div>
                 <div class="form-group row align-items-end" style="margin-bottom: 2%;">
-                    <label asp-for="Password" style="font-size: x-large;" class="control-label RTL right">סיסמה   <input asp-for="Password" class="form-control" />
-</label>
-                    <span asp-validation-for="Password" ></span>
+                    <label asp-for="Password" style="font-size: x-large;" class="control-label RTL right">
+                        סיסמה   <input asp-for="Password" class="form-control" />
+                    </label>
+                    <span asp-validation-for="Password"></span>
                 </div>
                 <div class="form-group row align-items-end" style="margin-bottom: 2%;">
                     <label asp-for="Email" style="font-size: x-large;" class="control-label RTL right">אימייל <input asp-for="Email" class="form-control" /></label>
-                    
-                    <span asp-validation-for="Email" ></span>
+
+                    <span asp-validation-for="Email"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save"  style="background-color: rgb(16, 124, 28) !important;  float: right; width: 100%"  class="btn btn-success" />
+                    <input type="submit" value="Save" style="background-color: rgb(16, 124, 28) !important;  float: right; width: 100%" class="btn btn-success" />
                 </div>
             </form>
             @if (ViewData["Error"] != null)
@@ -51,9 +53,12 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@if (Context.Session.GetString("userName").Equals("admin") && !@Model.UserName.Equals("admin"))
+{
+    <div>
+        <a asp-action="Index">חזרה לרשימת המשתמשים</a>
+    </div>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

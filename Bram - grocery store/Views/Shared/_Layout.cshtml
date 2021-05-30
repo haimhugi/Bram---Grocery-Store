@@ -9,12 +9,7 @@
     <title>Bram - @ViewData["Title"]</title>
     @await Html.PartialAsync("_Favicons")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
-
-
 
     @*<link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/background.css" />*@
@@ -93,11 +88,6 @@
                         </li>
                     </ul>
                 </div>
-                @*
-                    <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index" style="float:right">
-                        <img style="height:50px;" src="/pics/logo.png" />
-                    </a>*@
-
                 <form class="d-flex searchi" asp-controller="Products" asp-action="Search">
                     <input class="form-control me-2" asp-controller="Products" asp-action="Search" type="search"
                            placeholder="חיפוש מוצר..." aria-label="Search" name="product">
@@ -106,6 +96,7 @@
             </div>
         </div>
     </nav>
+
     <!-- End NavBar -->
     <div class="container">
         <main role="main" class="pb-3">

@@ -5,9 +5,9 @@
     ViewData["Title"] = "Index";
 }
 
-    @section css {
-        <link href="@Url.Content("~/css/products.css")" rel="stylesheet" />
-    }
+@section css {
+    <link href="@Url.Content("~/css/products.css")" rel="stylesheet" />
+}
 
 
 @if (Context.Session.GetString("userName") != null && Context.Session.GetString("userName").Equals("admin"))
