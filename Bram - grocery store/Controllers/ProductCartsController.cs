@@ -90,7 +90,7 @@ namespace Bram___grocery_store.Controllers
                         User = _context.User.Where(u => u.Id == int.Parse(HttpContext.Session.GetString("userId"))).FirstOrDefault()
                     };
                     //myNewShoppingCart.ProductsCart.Add(productCart);
-                   // myNewShoppingCart.Id = int.Parse(myShoppingCartId);
+                    // myNewShoppingCart.Id = int.Parse(myShoppingCartId);
                     _context.Add(myNewShoppingCart);
                     await _context.SaveChangesAsync();
                     myShoppingCartId = myNewShoppingCart.Id.ToString();
@@ -155,5 +155,94 @@ namespace Bram___grocery_store.Controllers
         {
             return _context.ProductCart.Any(e => e.Id == id);
         }
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeTheValueAdd([Bind("Amount,FinalPrice,Id,Name,Price,PhotoUrl")] int? id)
+        {
+            if (HttpContext.Session.GetString("userId") == null)
+            {
+                return View("../users/Login");
+            }
+
+            var productCart = await _context.ProductCart.FindAsync(id);
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    productCart = await _context.ProductCart.Include(p=> p.Product).FirstOrDefaultAsync(m => m.Id == id); 
+                    productCart.Amount++;
+                    productCart.FinalPrice = productCart.Amount * productCart.Product.Price;
+                    _context.Update(productCart);
+                    await _context.SaveChangesAsync();
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductCartExists(productCart.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(productCart);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeTheValueMinus([Bind("Amount,FinalPrice,Id,Name,Price,PhotoUrl")] int? id)
+        {
+            if (HttpContext.Session.GetString("userId") == null)
+            {
+                return View("../users/Login");
+            }
+
+            var productCart = await _context.ProductCart.FindAsync(id);
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    productCart = await _context.ProductCart.Include(p => p.Product).FirstOrDefaultAsync(m => m.Id == id);
+                    productCart.Amount--;
+                    productCart.FinalPrice = productCart.Amount * productCart.Product.Price;
+                    _context.Update(productCart);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductCartExists(productCart.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(productCart);
+        }
+        
     }
 }

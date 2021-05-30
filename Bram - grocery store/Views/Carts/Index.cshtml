@@ -14,13 +14,13 @@
             <th scope="col" class="text-right font-weight-boldt"></th>
         </tr>
     </thead>
-    <tbody class="text-danger">
+    <tbody class="text">
         @foreach (var item in Model)
         {
         <tr>
             <td class="text-right font-weight-bold">
                 <form asp-controller="Carts" asp-action="Delete" asp-route-id="@item.Id" class="mb-3">
-                    <input type="submit" value="מחק עגלה" class="btn btn-success btn-block opacity rounded-0" />
+                    <input  style="background-color: #dc3545 !important"  type="submit" value="מחק עגלה" class="btn btn-danger btn-block opacity rounded-0" />
                 </form>
             </td>
             <td class="text-right font-weight-bold">
