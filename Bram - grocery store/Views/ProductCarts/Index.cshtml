@@ -38,8 +38,18 @@
     {
         <div class="row" style="text-align:center">
             <div class="col-sm align">
-                <h4>@item.FinalPrice ₪</h4>
-                <i class="fa fa-ils" aria-hidden="true"></i>
+                <h4 style=" width:50% !important; margin-bottom: 10%;font-weight: normal;">
+                    <script type="text/javascript">
+                        (function () {
+                            var finalPrice = @item.Amount * @item.Product.Price;
+                                finalPrice = finalPrice.toFixed(2);
+                               document.write(finalPrice);
+
+                       })();
+                    </script>
+                    <i class="fa fa-ils" aria-hidden="true"></i>
+                    ₪
+                </h4>
             </div>
             <div class="col-sm align">
                 <div class="container">
@@ -106,8 +116,9 @@
             <h4 style=" width:50% !important; margin-bottom: 10%;font-weight: normal;">
                 <script type="text/javascript">
                        (function () {
-                           var finalPrice = @Model.Sum(p=>p.Amount*p.Product.Price)
-                               document.write(finalPrice.toPrecision(3));
+                           var finalPrice = @Model.Sum(p => p.Amount * p.Product.Price)
+                               finalPrice = finalPrice.toFixed(2);
+                               document.write(finalPrice);
 
                        })();
                 </script>
