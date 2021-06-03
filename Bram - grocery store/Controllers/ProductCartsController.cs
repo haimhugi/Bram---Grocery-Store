@@ -232,9 +232,16 @@ namespace Bram___grocery_store.Controllers
                 {
                     productCart = await _context.ProductCart.Include(p => p.Product).FirstOrDefaultAsync(m => m.Id == id);
                     productCart.Amount--;
-                    productCart.FinalPrice = productCart.Amount * productCart.Product.Price;
-                    _context.Update(productCart);
-                    await _context.SaveChangesAsync();
+                    if (productCart.Amount < 1)
+                    {
+                        
+                    }
+                    else
+                    {
+                        productCart.FinalPrice = productCart.Amount * productCart.Product.Price;
+                        _context.Update(productCart);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
