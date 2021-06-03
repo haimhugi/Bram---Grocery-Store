@@ -16,7 +16,7 @@ namespace Bram___grocery_store.Models
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        public int Price { get; set; }
+        public float Price { get; set; }
 
         [Display(Name = "Photo Product Url: ")]
         public string PhotoUrl { get; set; }

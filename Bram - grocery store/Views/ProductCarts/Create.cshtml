@@ -12,7 +12,7 @@
         <span asp-validation-for="ProductId" hidden></span>
     </div>
 
-    <div class="container bg-light opacity mt-5">
+    <div class="container opacity mt-5">
         <div class="row shura1 ">
             <div class="col-6 tmona text-center">
                 <img class="card-img-top" src="@Html.DisplayFor(model => model.Product.PhotoUrl)" alt="Alternate Text" style="width:80%;" />
@@ -45,7 +45,7 @@
                         <h5 class="col-4 font-weight-bold card-text text-center">
                             <i class="fa fa-ils" aria-hidden="true"></i>
                             @{
-                                var finalp = 0;
+                                float finalp = 0;
                                 if (Model.Amount == 1) finalp = Model.Product.Price;
                                     }
                         <label id="finalPrice">₪ @finalp.0</label>

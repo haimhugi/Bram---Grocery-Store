@@ -3,9 +3,12 @@
 @{
     ViewData["Title"] = "Details";
 }
+<head>
+    <link rel="stylesheet" href="~/css/cartDetail.css" />
+</head>
 
 <div class="container btn-block" style="background-color:none !important">
-    <div class="bg-light opacity p-3 m-5">
+    <div class=" opacity p-3 m-5">
         <br />
         <div class="row">
             <div class="col">
@@ -15,9 +18,9 @@
                 <div class="row">
                     <div class="col"></div>
                     <h4 class="col text-dark" style="text-align:right; direction:rtl">
-                        @Model.User.FirstName)
+                        @Model.User.FirstName
                     </h4>
-                    <h4 class="col font-weight-bold text-danger" style="text-align:right; direction:rtl">
+                    <h4 class="col font-weight-bold textgrn" style="text-align:right; direction:rtl">
                         שם פרטי:
                     </h4>
                 </div>
@@ -25,9 +28,9 @@
                 <div class="row">
                     <div class="col"></div>
                     <h4 class="col text-dark" style="text-align:right; direction:rtl">
-                        @Model.User.LastName)
+                        @Model.User.LastName
                     </h4>
-                    <h4 class="col font-weight-bold text-danger" style="text-align:right; direction:rtl">
+                    <h4 class="col font-weight-bold textgrn" style="text-align:right; direction:rtl">
                         שם משפחה:
                     </h4>
                 </div>
@@ -37,7 +40,7 @@
                     <h4 class="col text-dark" style="text-align:right; direction:rtl">
                         @Model.User.Email
                     </h4>
-                    <h4 class="col font-weight-bold text-danger" style="text-align:right; direction:rtl">
+                    <h4 class="col font-weight-bold textgrn" style="text-align:right; direction:rtl">
                         כתובת אימייל:
                     </h4>
                 </div>
@@ -46,14 +49,14 @@
         </div>
         <hr />
         <br />
-        <h3 class="text-center text-danger font-weight-bold" style="text-align:right; direction:rtl">
+        <h3 class="text-center font-weight-bold" style="text-align:right; direction:rtl">
             סך לתשלום:
-            ₪ @ViewData["TotalCartPrice"]
+            @ViewData["TotalCartPrice"] ₪
             <i class="fa fa-ils" aria-hidden="true"></i>
         </h3>
         <br />
         <hr />
-        <h1 class="bg-light opacity p-2 m-2 text-center text-danger" style="align-items:center; direction:rtl;">תודה שקנית אצל ב.ר.א.ם!</h1>
+        <h1 class=" opacity p-2 m-2 text-center textgrn" style="align-items:center; direction:rtl;">תודה שקנית אצל ב.ר.א.ם!</h1>
         <img src="/pics/logo.png" style="width:30%; margin-left:35%; margin-right:35%; align-items:center" />
         <hr />
         <br />

@@ -4,9 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h2 class="text-center p-3 mt-3 bg-light opacity rounded-1  font-weight-bold">היסטוריית העגלות שלי</h2>
+<h2 class="text-center p-3 mt-3  opacity rounded-1  font-weight-bold">היסטוריית העגלות שלי</h2>
 
-<table class="table table-striped bg-light opacity">
+<table class="table table-striped  opacity">
     <thead>
         <tr>
             <th scope="col" class="text-right font-weight-boldt"></th>
@@ -20,6 +20,7 @@
             var j=0;
             var txt = "";
             var backcolor = "";
+            var bs = "";
         }
         @foreach (var item in Model)
         {
@@ -27,16 +28,18 @@
 
             { txt = "bold";
                 backcolor = "#e6e6e6";
+                bs = "var(--bs-table-striped-bg)";
             }
 
             else
             { txt = "normal";
                 backcolor = "white";
+                bs = "none";
             }
             i++;
             j++;
 
-        <tr style="text-align:center;">
+        <tr style="text-align:center; --bs-table-accent-bg : @bs;">
             <td style="background-color:@backcolor" class="text-right font-weight-bold">
                 <form asp-controller="Carts" asp-action="Delete" asp-route-id="@item.Id" class="mb-3">
                     <input style="background-color: #dc3545 !important" type="submit" value="מחק עגלה" class="btn btn-danger btn-block opacity rounded-0" />

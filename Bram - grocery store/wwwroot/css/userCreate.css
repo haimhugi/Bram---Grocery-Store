@@ -1,0 +1,20 @@
+label {
+float:right;
+}
+.createBtn {
+    margin-top: 3vh;
+    float: right;
+    width: 100%;
+}
+.createBtnInput{
+    width:100%;
+    margin-bottom: 2vh;
+}
+.loginBtn {
+    float: right;
+    color: white !important;
+    margin-top: 4vh;
+}
+input{
+    direction:rtl;
+}

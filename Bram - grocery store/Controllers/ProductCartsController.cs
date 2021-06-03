@@ -97,26 +97,34 @@ namespace Bram___grocery_store.Controllers
                     HttpContext.Session.SetString("CartId", myShoppingCartId);
                 }
 
-                var newProductInCart = new ProductCart()
+                ProductCart test = _context.ProductCart.Include(pc => pc.Product).Include(pc => pc.Cart).Where(pc => pc.Product.Name == productCart.Product.Name)
+                    .Where(pc => pc.Cart.Id ==  Int32.Parse(myShoppingCartId)).FirstOrDefault();
+                if (test == null)
                 {
-                    Amount = productCart.Amount,
-                    Product = _context.Product.Where(p => p.Id == productCart.ProductId).FirstOrDefault(),
-                    ProductId = productCart.ProductId,
-                    FinalPrice = (productCart.Amount * productCart.Product.Price),
-                    Cart = _context.Cart.Where(S => S.Id == int.Parse(myShoppingCartId)).FirstOrDefault(),
-                    CartId = int.Parse(myShoppingCartId)
+                    var newProductInCart = new ProductCart()
+                    {
+                        Amount = productCart.Amount,
+                        Product = _context.Product.Where(p => p.Id == productCart.ProductId).FirstOrDefault(),
+                        ProductId = productCart.ProductId,
+                        FinalPrice = (productCart.Amount * productCart.Product.Price),
+                        Cart = _context.Cart.Where(S => S.Id == int.Parse(myShoppingCartId)).FirstOrDefault(),
+                        CartId = int.Parse(myShoppingCartId)
 
-                };
-                var prodactExsits = _context.ProductCart.Where(p => p.ProductId == productCart.ProductId && p.CartId == int.Parse(myShoppingCartId)).FirstOrDefault();
-                if (prodactExsits != null)
+                    };
+
+                    _context.Add(newProductInCart);
+                    await _context.SaveChangesAsync();
+                    return View("../Products/Index", _context.Product);
+                }
+                else
                 {
-                    newProductInCart.Id = prodactExsits.Id;
+                    test.Amount += productCart.Amount;
+                    test.FinalPrice += productCart.Product.Price *productCart.Amount;
+                    _context.Update(test);
+                    await _context.SaveChangesAsync();
                     return View("../Products/Index", _context.Product);
                 }
 
-                _context.Add(newProductInCart);
-                await _context.SaveChangesAsync();
-                return View("../Products/Index", _context.Product);
             }
             // ViewData["ProductId"] = new SelectList(_context.Product, "Id", productCart.ProductId);
             ViewData["ProductId"] = new SelectList(_context.Product, "Id");
